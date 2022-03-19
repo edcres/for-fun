@@ -26,7 +26,6 @@ fun setUpGame() {
     //val mapXAxis = listOf<Int>(1,2,3,4,5,6,7,8,9,10)
     //val mapYAxis = listOf<Int>(1,2,3,4,5,6,7,8,9,10)
 
-
     makeShip1()
     makeShip2()
 

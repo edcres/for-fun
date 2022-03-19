@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/mainRed"
     tools:context=".TapBattleActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/p2LayoutBox"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#FFBE1F"
+        android:background="@color/mainRed"
         android:onClick="p2LayoutBoxClicked"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +37,7 @@
         android:id="@+id/p1LayoutBox"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#E22F2F"
+        android:background="@color/mainYellow"
         android:onClick="p1LayoutBoxClicked"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

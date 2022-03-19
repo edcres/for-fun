@@ -4,43 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D63030"
+    android:background="@color/colorPrimary"
     tools:context=".MainActivity">
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="167dp"
-        android:background="#FFBA14"
-        android:onClick="getTappingButtonClicked"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:text="Get Tapping!"
-        android:textAllCaps="true"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#FFF9F9"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="62dp"
-        android:background="#A1A63EB9"
-        android:padding="10dp"
         android:text="Fastest Thumb Wins"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="#FFF9F9"
+        android:textColor="@color/txtWhite"
         android:textSize="30sp"
         android:textStyle="bold"
         android:typeface="normal"
         app:fontFamily="sans-serif-medium"
+        app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:background="@color/mainYellow"
+        android:onClick="getTappingButtonClicked"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Get Tapping !"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

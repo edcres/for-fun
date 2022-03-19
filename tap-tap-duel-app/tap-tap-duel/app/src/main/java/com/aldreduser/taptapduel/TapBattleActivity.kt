@@ -3,8 +3,7 @@ package com.aldreduser.taptapduel
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import kotlinx.android.synthetic.main.gameui_activity_tap_battle.*
+import kotlinx.android.synthetic.main.activity_tap_battle.*
 
 // allow user to choose a different number of max taps
 // every 10 points the phone vibrates
@@ -17,7 +16,7 @@ class TapBattleActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.gameui_activity_tap_battle)
+        setContentView(R.layout.activity_tap_battle)
     }
 
     fun p1LayoutBoxClicked(view: View) {
