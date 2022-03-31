@@ -5,6 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 
 // A cool way: https://www.youtube.com/watch?v=25AUSTtob6g
@@ -41,14 +45,15 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
-        val testTxt = "kmkmkkmkkmkmmkmkkkkmkmkmkmkmkmkkmkkkmkmkmkmmk"
         while (true) {
-            matrixTxt.text = testTxt
-            Log.d(mainTAG, "onCreate: called")
+            CoroutineScope(Dispatchers.IO).launch {
+                populateY(makeXAxis())
+                withContext(Dispatchers.Main) {
+                    populateMatrixTxt()
+                }
+                Thread.sleep(500)
+            }
         }
-
-
 
 //        while (true) {
 //            Log.d(mainTAG, "while called")
