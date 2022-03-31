@@ -1,14 +1,16 @@
 package com.example.matrixcode
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
-import kotlinx.coroutines.*
-import java.util.*
+import androidx.core.content.ContextCompat
 
 // A cool way: https://www.youtube.com/watch?v=25AUSTtob6g
+
+// Click the screen to use the app
 
 /**
  *
@@ -30,12 +32,16 @@ class MainActivity : AppCompatActivity() {
         "Z", "X", "->", "$", "*", "0", "1", "0", "1", "0", "1", "0", "1", "8",
         "&", "@", "]{", "^", "~", "<", ">", "+", " ", " "," "," "," "," "
     )
-    private val yAxisQueue: LinkedList<String> = LinkedList<String>() // add/remove
+//    private val yAxisQueue: LinkedList<String> = LinkedList<String>() // add/remove
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.navigationBarColor = ContextCompat.getColor(this, R.color.black)
+//            window.navigationBarColor = resources.getColor(R.color.black, null)
+        }
 
         matrixTxt = findViewById(R.id.matrix_txt)
 
