@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import java.util.*
 
 // A cool way: https://www.youtube.com/watch?v=25AUSTtob6g
@@ -42,15 +39,28 @@ class MainActivity : AppCompatActivity() {
 
         matrixTxt = findViewById(R.id.matrix_txt)
 
-        while (true) {
-            CoroutineScope(Dispatchers.IO).launch {
-                populateY(makeXAxis())
-                withContext(Dispatchers.Main) {
-                    populateMatrixTxt()
-                }
-                Thread.sleep(500)
-            }
+        matrixTxt.setOnClickListener {
+            populateY(makeXAxis())
+            populateMatrixTxt()
         }
+
+//        while (true) {
+//            Log.d(mainTAG, "onCreate: loop")
+//            matrixTxt.performClick()
+//            runBlocking {
+//                delay(500)
+//            }
+//        }
+
+//        while (true) {
+//            CoroutineScope(Dispatchers.IO).launch {
+//                populateY(makeXAxis())
+//                withContext(Dispatchers.Main) {
+//                    populateMatrixTxt()
+//                }
+//                Thread.sleep(500)
+//            }
+//        }
 
 //        while (true) {
 //            Log.d(mainTAG, "while called")
