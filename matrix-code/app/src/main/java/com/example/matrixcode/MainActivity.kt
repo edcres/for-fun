@@ -42,9 +42,6 @@ class MainActivity : AppCompatActivity() {
 
         matrixTxt = findViewById(R.id.matrix_txt)
 
-
-
-
         while (true) {
             CoroutineScope(Dispatchers.IO).launch {
                 populateY(makeXAxis())
