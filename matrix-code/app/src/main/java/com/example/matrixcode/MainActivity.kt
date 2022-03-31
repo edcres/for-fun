@@ -2,7 +2,9 @@ package com.example.matrixcode
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatDelegate
 import java.util.*
 
 // A cool way: https://www.youtube.com/watch?v=25AUSTtob6g
@@ -13,27 +15,48 @@ import java.util.*
  * future:
  *  - display a consecutive vertical gap between characters
  *      - maybe manually input " " withing the same index 1 to 4 consecutive times
+ *  - Take different screen sizes into account
+ *      - 'xAxisChars' an 'yAxisChars' values are a cording to the screen size
  */
 
 class MainActivity : AppCompatActivity() {
 
+    private val mainTAG = "Main_TAG"
     private val xAxisChars = 39
     private val yAxisChars = 48
     private lateinit var matrixTxt: TextView
     private val allLetters = listOf(
-        "Z", "X", "->", "$", "*", "0", "1", "0", "1", "0", "1", "0", "1", "8", "&", "@", "]{", "^", "~", "<", ">", "+",
-        " ", " "," "," "," "," "
+        "Z", "X", "->", "$", "*", "0", "1", "0", "1", "0", "1", "0", "1", "8",
+        "&", "@", "]{", "^", "~", "<", ">", "+", " ", " "," "," "," "," "
     )
-    private val yAxisQueue: LinkedList<String> = LinkedList<String>()
-    // add/remove
+    private val yAxisQueue: LinkedList<String> = LinkedList<String>() // add/remove
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         matrixTxt = findViewById(R.id.matrix_txt)
 
-        // do an infinite while loop, populateY(), populateMatrixTxt, short delay, repeat
+
+
+
+
+        val testTxt = "kmkmkkmkkmkmmkmkkkkmkmkmkmkmkmkkmkkkmkmkmkmmk"
+        while (true) {
+            matrixTxt.text = testTxt
+            Log.d(mainTAG, "onCreate: called")
+        }
+
+
+
+//        while (true) {
+//            Log.d(mainTAG, "while called")
+//            populateY(makeXAxis())
+//            Log.d(mainTAG, "yAxisQueue: size = ${yAxisQueue.size} \n${yAxisQueue.last}")
+//            Thread.sleep(500)
+//            populateMatrixTxt()
+//        }
     }
 
     private fun populateMatrixTxt() {
@@ -41,19 +64,20 @@ class MainActivity : AppCompatActivity() {
         for (i in 0 until yAxisQueue.size) {
             matrixString = "${yAxisQueue[i]}\n$matrixString"
         }
+        Log.d(mainTAG, "\n$matrixString")
         matrixTxt.text = matrixString
     }
 
     private fun makeXAxis(): String {
         var xAxisString = ""
         for (i in 0 until xAxisChars) {
-            xAxisString = "$xAxisString ${/* todo: insert random letter from the 'allLetters' list */}"
+            xAxisString = "$xAxisString ${allLetters[allLetters.indices.random()]}"
         }
         return xAxisString
     }
 
-    private fun populateY() {
-        yAxisQueue.add(makeXAxis())
+    private fun populateY(xAxis: String) {
+        yAxisQueue.add(xAxis)
         if (yAxisQueue.size > yAxisChars) {
             yAxisQueue.remove()
         }
