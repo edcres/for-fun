@@ -1,8 +1,10 @@
 package com.aldreduser.taptapduel
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_tap_battle.*
 
 // allow user to choose a different number of max taps
@@ -17,6 +19,9 @@ class TapBattleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tap_battle)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.navigationBarColor = ContextCompat.getColor(this, R.color.mainYellow)
+        }
     }
 
     fun p1LayoutBoxClicked(view: View) {

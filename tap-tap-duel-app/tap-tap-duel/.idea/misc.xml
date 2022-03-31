@@ -9,6 +9,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/activity_tap_battle.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/gameui_activity_tap_battle.xml" value="0.3098958333333333" />
       </map>
     </option>
