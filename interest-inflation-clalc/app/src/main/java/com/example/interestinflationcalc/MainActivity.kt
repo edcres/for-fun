@@ -13,6 +13,8 @@ import kotlin.math.pow
 // tax bracket,
 // percentage of a number (ie. what percentage is 5.8 out of 33)
 
+// todo: test the app features
+
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding : ActivityMainBinding
@@ -29,15 +31,32 @@ class MainActivity : AppCompatActivity() {
 
         binding.apply {
             annualIncomeBtn.setOnClickListener {
-                if (!annualIncomeEt.text.isNullOrEmpty()) {
+                val annualIncomeEtStr = annualIncomeEt.text.toString()
+                if (annualIncomeEtStr.isNotEmpty()) {
                     annualIncomeAnswerTxt.text = getAmountOfTaxesUsingTaxBracket(
-                        annualIncomeEt.text.toString().toDouble()
+                        annualIncomeEtStr.toDouble()
+                    ).toString()
+                }
+            }
+
+            gasCostBtn.setOnClickListener {
+                val gasMilesEtStr = gasMilesEt.text.toString()
+                val milesPerGallonEtStr = milesPerGallonEt.text.toString()
+                val gasPricePerGallonEtStr = gasPricePerGallonEt.text.toString()
+                if (gasMilesEtStr.isNotEmpty() && milesPerGallonEtStr.isNotEmpty()
+                    && gasPricePerGallonEtStr.isNotEmpty()) {
+                    gasCostAnswerTxt.text = getGasCost(
+                        gasMilesEtStr.toDouble(),
+                        milesPerGallonEtStr.toDouble(),
+                        gasPricePerGallonEtStr.toDouble()
                     ).toString()
                 }
             }
 
 
-            
+
+
+
 
 
 

@@ -64,7 +64,6 @@
                     app:layout_constraintStart_toEndOf="@+id/annual_income_btn"
                     app:layout_constraintTop_toTopOf="@+id/annual_income_btn" />
 
-
                 <TextView
                     android:id="@+id/gas_cost_txt"
                     android:layout_width="wrap_content"
@@ -74,7 +73,77 @@
                     android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/annual_income_btn" />
+
+                <EditText
+                    android:id="@+id/gas_miles_et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="gas miles"
+                    android:inputType="number|numberDecimal"
+                    app:layout_constraintStart_toStartOf="@+id/gas_cost_txt"
+                    app:layout_constraintTop_toBottomOf="@+id/gas_cost_txt" />
+
+                <EditText
+                    android:id="@+id/miles_per_gallon_et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="miles per gallon"
+                    android:inputType="number|numberDecimal"
+                    app:layout_constraintStart_toStartOf="@+id/gas_miles_et"
+                    app:layout_constraintTop_toBottomOf="@+id/gas_miles_et" />
+
+                <EditText
+                    android:id="@+id/gas_price_per_gallon_et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="gas price per gallon"
+                    android:inputType="number|numberDecimal"
+                    app:layout_constraintStart_toStartOf="@+id/miles_per_gallon_et"
+                    app:layout_constraintTop_toBottomOf="@+id/miles_per_gallon_et" />
+
+                <ImageButton
+                    android:id="@+id/gas_cost_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent"
+                    android:layout_marginStart="16dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="16dp"
+                    app:layout_constraintStart_toStartOf="@+id/gas_price_per_gallon_et"
+                    app:layout_constraintTop_toBottomOf="@+id/gas_price_per_gallon_et"
+                    app:srcCompat="@drawable/ic_enter_24" />
+
+                <TextView
+                    android:id="@+id/gas_cost_answer_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/gas_cost_btn"
+                    app:layout_constraintEnd_toEndOf="@+id/gas_price_per_gallon_et"
+                    app:layout_constraintStart_toEndOf="@+id/annual_income_btn"
+                    app:layout_constraintTop_toTopOf="@+id/gas_cost_btn" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 <TextView
                     android:id="@+id/inflation_rate_txt"
@@ -85,7 +154,7 @@
                     android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/gas_cost_txt" />
+                    app:layout_constraintTop_toBottomOf="parent" />
 
                 <TextView
                     android:id="@+id/price_with_inflation_txt"
