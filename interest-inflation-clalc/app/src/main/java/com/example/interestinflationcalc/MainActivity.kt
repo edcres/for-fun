@@ -25,17 +25,23 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun getGasCost(
-        miles: Double,
-        
-    ) {
-
+    private fun getAmountOfTaxesUsingTaxBracket() {
+        // todo: tax brackets updated April 2022
     }
 
-    fun getInflationRate(startingValue: Double, endValue: Double) =
+    private fun getGasCost(
+        miles: Double,
+        milesPerGallon: Double,
+        gasPricePerGallon: Double
+    ): Double {
+        val gallons = miles / milesPerGallon
+        return gallons * gasPricePerGallon
+    }
+
+    private fun getInflationRate(startingValue: Double, endValue: Double) =
         (endValue - startingValue) / startingValue * 100
 
-    fun getPriceWithInflation(
+    private fun getPriceWithInflation(
         startingValue: Double,
         inflationRateDecimal: Double,
         years: Int,
