@@ -25,8 +25,70 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun getAmountOfTaxesUsingTaxBracket() {
+    private fun getAmountOfTaxesUsingTaxBracket(
+        annualIncome: Double
+    ): Double {
+        // todo: In the future, make this so the user can input their
+        //  custom tax brackets with the amounts.
+        var result = 0.0
         // todo: tax brackets updated April 2022
+        // 10% (to $9,950), 12% (to $40,525), 22% (to $86,375), 24% (to $164,925),
+        //   32% (to $209,425), 35% (to $523,600), 37% (to infinity)
+        // $995 plus 12% of the amount over $9,950
+        val newBracketsAndTaxes = mutableListOf(
+            listOf(0.10, 0.0),
+            listOf(0.12, 9_950.0),
+            listOf(0.22, 40_525.0),
+            listOf(0.24, 86_375.0),
+            listOf(0.32, 164_925.0),
+            listOf(0.35, 209_425.0),
+            listOf(0.37, 523_600.0)
+        )
+        newBracketsAndTaxes.forEach { interestAndFloor ->
+            if(annualIncome > interestAndFloor[1]) {
+                result += (annualIncome - interestAndFloor[1]) * interestAndFloor[0]
+            }
+        }
+
+//        // I chose not to use a mutableMap bc the items might not be in order.
+//        val bracketsAndTaxes = mutableMapOf(
+//            0.10 to 0.0,
+//            0.12 to 9_950.0,
+//            0.22 to 40_525.0,
+//            0.24 to 86_375.0,
+//            0.32 to 164_925.0,
+//            0.35 to 209_425.0,
+//            0.37 to 523_600.0    // null bc it's infinity
+//        )
+////        bracketsAndTaxes.put()
+//        bracketsAndTaxes.forEach { (key, value) ->
+//            if (annualIncome > value) {
+//                result += (annualIncome - value) * key
+//            }
+//        }
+
+//        if (annualIncome > 0) { // 10%
+//            result += annualIncome * 0.10
+//            if (annualIncome > 9_950) { // 12%
+//                result += (annualIncome - 9_950) * .12
+//                if (annualIncome > 40_525) {
+//                    result += (annualIncome - 40_525) * .22
+//                    if (annualIncome > 86_375) {
+//                        result += (annualIncome - 86_375) * .24
+//                        if (annualIncome > 164_925) {
+//                            result += (annualIncome - 164_925) * .32
+//                            if (annualIncome > 209_425) {
+//                                result += (annualIncome - 209_425) * .35
+//                                if (annualIncome > 523_600) {
+//                                    result += (annualIncome - 523_600) * .37
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+        return result
     }
 
     private fun getGasCost(
