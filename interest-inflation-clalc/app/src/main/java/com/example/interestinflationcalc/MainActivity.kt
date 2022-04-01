@@ -27,8 +27,6 @@ class MainActivity : AppCompatActivity() {
             window.navigationBarColor = ContextCompat.getColor(this, R.color.black)
         }
 
-
-
         binding.apply {
             annualIncomeBtn.setOnClickListener {
                 val annualIncomeEtStr = annualIncomeEt.text.toString()
@@ -61,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                         inflationRateStartStr.toDouble(),
                         inflationRateEndStr.toDouble()
                     ).toString()
-                }   // todo: make sure the answer is in percent
+                }
             }
 
             inflationValueBtn.setOnClickListener {
@@ -90,21 +88,31 @@ class MainActivity : AppCompatActivity() {
                     simpleInterestAnswerTxt.text = getSimpleInterest(
                         simpleInterestStartStr.toDouble(),
                         simpleInterestRateStr.toDouble() / 100,
-                        simpleInterestYearsStr.toInt()
+                        simpleInterestYearsStr.toDouble()
                     ).toString()
                 }
             }
 
-
-
-
-
-
+            compoundInterestBtn.setOnClickListener {
+                val compoundInterestStartStr = compoundInterestStartEt.text.toString()
+                val compoundInterestRateStr = compoundInterestRateEt.text.toString()
+                val compoundInterestCompoundedYearsStr = compoundInterestCompoundedYearsEt
+                    .text.toString()
+                val compoundInterestYearsStr = compoundInterestYearsEt.text.toString()
+                if (compoundInterestStartStr.isNotEmpty() && compoundInterestRateStr.isNotEmpty()
+                    && compoundInterestCompoundedYearsStr.isNotEmpty()
+                    && compoundInterestYearsStr.isNotEmpty()
+                ) {
+                    compoundInterestTxt.text = getCompoundInterest(
+                        compoundInterestStartStr.toDouble(),
+                        compoundInterestRateStr.toDouble() / 100,
+                        compoundInterestCompoundedYearsStr.toInt(),
+                        compoundInterestYearsStr.toDouble()
+                    ).toString()
+                }
+            }
         }
     }
-
-
-
 
     private fun getAmountOfTaxesUsingTaxBracket(
         annualIncome: Double
@@ -210,7 +218,7 @@ class MainActivity : AppCompatActivity() {
     private fun getSimpleInterest(
         startingValue: Double,
         interestDecimal: Double,
-        timeInYears: Int
+        timeInYears: Double
     ) = startingValue * ( 1 + interestDecimal * timeInYears)
 
     // Convert everything to years at the point of calling this function.
