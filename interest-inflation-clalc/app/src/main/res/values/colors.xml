@@ -10,4 +10,5 @@
 
     <color name="main">#5EDFFF</color>
     <color name="highlight">#0057EC</color>
+    <color name="transparent">#00000000</color>
 </resources>

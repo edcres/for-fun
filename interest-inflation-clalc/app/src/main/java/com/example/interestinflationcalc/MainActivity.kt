@@ -4,6 +4,8 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
+import com.example.interestinflationcalc.databinding.ActivityMainBinding
 import kotlin.math.ceil
 import kotlin.math.pow
 
@@ -12,18 +14,38 @@ import kotlin.math.pow
 // percentage of a number (ie. what percentage is 5.8 out of 33)
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var binding : ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+//        setContentView(R.layout.activity_main)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.navigationBarColor = ContextCompat.getColor(this, R.color.black)
         }
 
 
 
+        binding.apply {
+            annualIncomeBtn.setOnClickListener {
+                if (!annualIncomeEt.text.isNullOrEmpty()) {
+                    annualIncomeAnswerTxt.text = getAmountOfTaxesUsingTaxBracket(
+                        annualIncomeEt.text.toString().toDouble()
+                    ).toString()
+                }
+            }
 
 
+            
+
+
+
+        }
     }
+
+
+
 
     private fun getAmountOfTaxesUsingTaxBracket(
         annualIncome: Double
