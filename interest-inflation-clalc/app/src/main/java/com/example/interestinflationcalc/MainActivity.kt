@@ -53,6 +53,17 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
+            inflationRateBtn.setOnClickListener {
+                val inflationRateStartStr = inflationRateStartEt.text.toString()
+                val inflationRateEndStr = inflationRateEndEt.text.toString()
+                if (inflationRateStartStr.isNotEmpty() && inflationRateEndStr.isNotEmpty()) {
+                    inflationRateAnswerTxt.text = getInflationRate(
+                        inflationRateStartStr.toDouble(),
+                        inflationRateEndStr.toDouble()
+                    ).toString()
+                }
+            }
+
 
 
 
