@@ -61,6 +61,22 @@ class MainActivity : AppCompatActivity() {
                         inflationRateStartStr.toDouble(),
                         inflationRateEndStr.toDouble()
                     ).toString()
+                }   // todo: make sure the answer is in percent
+            }
+
+            inflationValueBtn.setOnClickListener {
+                val inflationValStartStr = inflationValStartEt.text.toString()
+                val inflationRateStr = inflationRateEt.text.toString()
+                val inflationYearsStr = inflationYearsEt.text.toString()
+                if (inflationValStartStr.isNotEmpty() && inflationRateStr.isNotEmpty()
+                    && inflationYearsStr.isNotEmpty()
+                ) {
+                    inflationValueAnswerTxt.text = getPriceWithInflation(
+                        inflationValStartStr.toDouble(),
+                        inflationRateStr.toDouble() / 100,
+                        inflationYearsStr.toInt(),
+                        pastInflationToggleBtn.isChecked    // if true is past
+                    ).toString()
                 }
             }
 

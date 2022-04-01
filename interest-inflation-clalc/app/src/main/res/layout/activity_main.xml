@@ -16,191 +16,175 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="600dp">
+                android:layout_height="700dp">
 
-                <TextView
-                    android:id="@+id/calc_taxes_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:text="Calculate Taxes"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+<!--                <TextView-->
+<!--                    android:id="@+id/calc_taxes_txt"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="16dp"-->
+<!--                    android:text="Calculate Taxes"-->
+<!--                    android:textSize="24sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
-                <EditText
-                    android:id="@+id/annual_income_et"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="annual income"
-                    android:inputType="number|numberDecimal"
-                    app:layout_constraintStart_toStartOf="@+id/calc_taxes_txt"
-                    app:layout_constraintTop_toBottomOf="@+id/calc_taxes_txt" />
+<!--                <EditText-->
+<!--                    android:id="@+id/annual_income_et"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:ems="10"-->
+<!--                    android:hint="annual income"-->
+<!--                    android:inputType="number|numberDecimal"-->
+<!--                    app:layout_constraintStart_toStartOf="@+id/calc_taxes_txt"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/calc_taxes_txt" />-->
 
-                <ImageButton
-                    android:id="@+id/annual_income_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:background="@color/transparent"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:paddingBottom="16dp"
-                    app:layout_constraintStart_toStartOf="@+id/annual_income_et"
-                    app:layout_constraintTop_toBottomOf="@+id/annual_income_et"
-                    app:srcCompat="@drawable/ic_enter_24" />
+<!--                <ImageButton-->
+<!--                    android:id="@+id/annual_income_btn"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:background="@color/transparent"-->
+<!--                    android:paddingStart="16dp"-->
+<!--                    android:paddingEnd="16dp"-->
+<!--                    android:paddingBottom="16dp"-->
+<!--                    app:layout_constraintStart_toStartOf="@+id/annual_income_et"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/annual_income_et"-->
+<!--                    app:srcCompat="@drawable/ic_enter_24" />-->
 
-                <TextView
-                    android:id="@+id/annual_income_answer_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/annual_income_btn"
-                    app:layout_constraintEnd_toEndOf="@+id/annual_income_et"
-                    app:layout_constraintStart_toEndOf="@+id/annual_income_btn"
-                    app:layout_constraintTop_toTopOf="@+id/annual_income_btn" />
+<!--                <TextView-->
+<!--                    android:id="@+id/annual_income_answer_txt"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="TextView"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="16sp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/annual_income_btn"-->
+<!--                    app:layout_constraintEnd_toEndOf="@+id/annual_income_et"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/annual_income_btn"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/annual_income_btn" />-->
 
-                <TextView
-                    android:id="@+id/gas_cost_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:text="Calculate Cost Of Gas"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/annual_income_btn" />
+<!--                <TextView-->
+<!--                    android:id="@+id/gas_cost_txt"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="16dp"-->
+<!--                    android:text="Calculate Cost Of Gas"-->
+<!--                    android:textSize="24sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/annual_income_btn" />-->
 
-                <EditText
-                    android:id="@+id/gas_miles_et"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="gas miles"
-                    android:inputType="number|numberDecimal"
-                    app:layout_constraintStart_toStartOf="@+id/gas_cost_txt"
-                    app:layout_constraintTop_toBottomOf="@+id/gas_cost_txt" />
+<!--                <EditText-->
+<!--                    android:id="@+id/gas_miles_et"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:ems="10"-->
+<!--                    android:hint="gas miles"-->
+<!--                    android:inputType="number|numberDecimal"-->
+<!--                    app:layout_constraintStart_toStartOf="@+id/gas_cost_txt"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/gas_cost_txt" />-->
 
-                <EditText
-                    android:id="@+id/miles_per_gallon_et"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="miles per gallon"
-                    android:inputType="number|numberDecimal"
-                    app:layout_constraintStart_toStartOf="@+id/gas_miles_et"
-                    app:layout_constraintTop_toBottomOf="@+id/gas_miles_et" />
+<!--                <EditText-->
+<!--                    android:id="@+id/miles_per_gallon_et"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:ems="10"-->
+<!--                    android:hint="miles per gallon"-->
+<!--                    android:inputType="number|numberDecimal"-->
+<!--                    app:layout_constraintStart_toStartOf="@+id/gas_miles_et"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/gas_miles_et" />-->
 
-                <EditText
-                    android:id="@+id/gas_price_per_gallon_et"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="gas price per gallon"
-                    android:inputType="number|numberDecimal"
-                    app:layout_constraintStart_toStartOf="@+id/miles_per_gallon_et"
-                    app:layout_constraintTop_toBottomOf="@+id/miles_per_gallon_et" />
+<!--                <EditText-->
+<!--                    android:id="@+id/gas_price_per_gallon_et"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:ems="10"-->
+<!--                    android:hint="gas price per gallon"-->
+<!--                    android:inputType="number|numberDecimal"-->
+<!--                    app:layout_constraintStart_toStartOf="@+id/miles_per_gallon_et"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/miles_per_gallon_et" />-->
 
-                <ImageButton
-                    android:id="@+id/gas_cost_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/transparent"
-                    android:layout_marginStart="16dp"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:paddingBottom="16dp"
-                    app:layout_constraintStart_toStartOf="@+id/gas_price_per_gallon_et"
-                    app:layout_constraintTop_toBottomOf="@+id/gas_price_per_gallon_et"
-                    app:srcCompat="@drawable/ic_enter_24" />
+<!--                <ImageButton-->
+<!--                    android:id="@+id/gas_cost_btn"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@color/transparent"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:paddingStart="16dp"-->
+<!--                    android:paddingEnd="16dp"-->
+<!--                    android:paddingBottom="16dp"-->
+<!--                    app:layout_constraintStart_toStartOf="@+id/gas_price_per_gallon_et"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/gas_price_per_gallon_et"-->
+<!--                    app:srcCompat="@drawable/ic_enter_24" />-->
 
-                <TextView
-                    android:id="@+id/gas_cost_answer_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/gas_cost_btn"
-                    app:layout_constraintEnd_toEndOf="@+id/gas_price_per_gallon_et"
-                    app:layout_constraintStart_toEndOf="@+id/annual_income_btn"
-                    app:layout_constraintTop_toTopOf="@+id/gas_cost_btn" />
+<!--                <TextView-->
+<!--                    android:id="@+id/gas_cost_answer_txt"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="TextView"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="16sp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/gas_cost_btn"-->
+<!--                    app:layout_constraintEnd_toEndOf="@+id/gas_price_per_gallon_et"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/annual_income_btn"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/gas_cost_btn" />-->
 
-                <TextView
-                    android:id="@+id/inflation_rate_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:text="Calculate Inflation Rate"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/gas_cost_btn" />
+<!--                <TextView-->
+<!--                    android:id="@+id/inflation_rate_txt"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="16dp"-->
+<!--                    android:text="Calculate Inflation Rate"-->
+<!--                    android:textSize="24sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/gas_cost_btn" />-->
 
-                <EditText
-                    android:id="@+id/inflation_rate_start_et"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="starting cost"
-                    android:inputType="number|numberDecimal"
-                    app:layout_constraintStart_toStartOf="@+id/inflation_rate_txt"
-                    app:layout_constraintTop_toBottomOf="@+id/inflation_rate_txt" />
+<!--                <EditText-->
+<!--                    android:id="@+id/inflation_rate_start_et"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:ems="10"-->
+<!--                    android:hint="starting cost"-->
+<!--                    android:inputType="number|numberDecimal"-->
+<!--                    app:layout_constraintStart_toStartOf="@+id/inflation_rate_txt"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/inflation_rate_txt" />-->
 
-                <EditText
-                    android:id="@+id/inflation_rate_end_et"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="final cost"
-                    android:inputType="number|numberDecimal"
-                    app:layout_constraintStart_toStartOf="@+id/inflation_rate_start_et"
-                    app:layout_constraintTop_toBottomOf="@+id/inflation_rate_start_et" />
+<!--                <EditText-->
+<!--                    android:id="@+id/inflation_rate_end_et"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:ems="10"-->
+<!--                    android:hint="final cost"-->
+<!--                    android:inputType="number|numberDecimal"-->
+<!--                    app:layout_constraintStart_toStartOf="@+id/inflation_rate_start_et"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/inflation_rate_start_et" />-->
 
-                <ImageButton
-                    android:id="@+id/inflation_rate_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/transparent"
-                    android:layout_marginStart="16dp"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:paddingBottom="16dp"
-                    app:layout_constraintStart_toStartOf="@+id/inflation_rate_end_et"
-                    app:layout_constraintTop_toBottomOf="@+id/inflation_rate_end_et"
-                    app:srcCompat="@drawable/ic_enter_24" />
+<!--                <ImageButton-->
+<!--                    android:id="@+id/inflation_rate_btn"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@color/transparent"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:paddingStart="16dp"-->
+<!--                    android:paddingEnd="16dp"-->
+<!--                    android:paddingBottom="16dp"-->
+<!--                    app:layout_constraintStart_toStartOf="@+id/inflation_rate_end_et"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/inflation_rate_end_et"-->
+<!--                    app:srcCompat="@drawable/ic_enter_24" />-->
 
-                <TextView
-                    android:id="@+id/inflation_rate_answer_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/inflation_rate_btn"
-                    app:layout_constraintEnd_toEndOf="@+id/inflation_rate_end_et"
-                    app:layout_constraintStart_toEndOf="@+id/inflation_rate_btn"
-                    app:layout_constraintTop_toTopOf="@+id/inflation_rate_btn" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!--                <TextView-->
+<!--                    android:id="@+id/inflation_rate_answer_txt"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="TextView"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="16sp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/inflation_rate_btn"-->
+<!--                    app:layout_constraintEnd_toEndOf="@+id/inflation_rate_end_et"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/inflation_rate_btn"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/inflation_rate_btn" />-->
 
 
                 <TextView
@@ -212,7 +196,90 @@
                     android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/inflation_val_start_et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="starting cost"
+                    android:inputType="number|numberDecimal"
+                    app:layout_constraintStart_toStartOf="@+id/price_with_inflation_txt"
+                    app:layout_constraintTop_toBottomOf="@+id/price_with_inflation_txt" />
+
+                <EditText
+                    android:id="@+id/inflation_rate_et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="inflation rate %"
+                    android:inputType="number|numberDecimal"
+                    app:layout_constraintStart_toStartOf="@+id/inflation_val_start_et"
+                    app:layout_constraintTop_toBottomOf="@+id/inflation_val_start_et" />
+
+                <EditText
+                    android:id="@+id/inflation_years_et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="years"
+                    android:inputType="number|numberDecimal"
+                    app:layout_constraintStart_toStartOf="@+id/inflation_rate_et"
+                    app:layout_constraintTop_toBottomOf="@+id/inflation_rate_et" />
+
+                <ToggleButton
+                    android:id="@+id/past_inflation_toggle_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:textOff="future"
+                    android:textOn="past"
+                    android:backgroundTint="@color/highlight"
+                    android:textColor="@color/main"
+                    android:textAllCaps="false"
+                    app:layout_constraintBottom_toBottomOf="@+id/inflation_years_et"
+                    app:layout_constraintStart_toEndOf="@+id/inflation_years_et"
+                    app:layout_constraintTop_toTopOf="@+id/inflation_years_et" />
+
+                <ImageButton
+                    android:id="@+id/inflation_value_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:background="@color/transparent"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="16dp"
+                    app:layout_constraintStart_toStartOf="@+id/inflation_years_et"
+                    app:layout_constraintTop_toBottomOf="@+id/inflation_years_et"
+                    app:srcCompat="@drawable/ic_enter_24" />
+
+                <TextView
+                    android:id="@+id/inflation_value_answer_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/inflation_value_btn"
+                    app:layout_constraintEnd_toEndOf="@+id/inflation_years_et"
+                    app:layout_constraintStart_toEndOf="@+id/inflation_value_btn"
+                    app:layout_constraintTop_toTopOf="@+id/inflation_value_btn" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 <TextView
                     android:id="@+id/simple_interest_txt"
@@ -223,7 +290,7 @@
                     android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/price_with_inflation_txt" />
+                    app:layout_constraintTop_toBottomOf="parent" />
 
                 <TextView
                     android:id="@+id/compound_interest_txt"
