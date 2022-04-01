@@ -80,7 +80,20 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-
+            simpleInterestBtn.setOnClickListener {
+                val simpleInterestStartStr = simpleInterestStartEt.text.toString()
+                val simpleInterestRateStr = simpleInterestRateEt.text.toString()
+                val simpleInterestYearsStr = simpleInterestYearsEt.text.toString()
+                if (simpleInterestStartStr.isNotEmpty() && simpleInterestRateStr.isNotEmpty()
+                    && simpleInterestYearsStr.isNotEmpty()
+                ) {
+                    simpleInterestAnswerTxt.text = getSimpleInterest(
+                        simpleInterestStartStr.toDouble(),
+                        simpleInterestRateStr.toDouble() / 100,
+                        simpleInterestYearsStr.toInt()
+                    ).toString()
+                }
+            }
 
 
 
@@ -197,7 +210,7 @@ class MainActivity : AppCompatActivity() {
     private fun getSimpleInterest(
         startingValue: Double,
         interestDecimal: Double,
-        timeInYears: Double
+        timeInYears: Int
     ) = startingValue * ( 1 + interestDecimal * timeInYears)
 
     // Convert everything to years at the point of calling this function.
