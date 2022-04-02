@@ -22,12 +22,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.navigationBarColor = ContextCompat.getColor(this, R.color.main)
         }
-
         circleContainer = findViewById(R.id.circle_container)
         circleView = CircleView(this, touchCoordinates)
         circleContainer.addView(circleView)
@@ -45,6 +43,4 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onTouchEvent(event)
     }
-
-
 }

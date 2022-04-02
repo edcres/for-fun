@@ -1,6 +1,6 @@
 package com.example.screencoordinates
 
 data class TouchCoordinates (
-    var xCor: Float = 0f,
-    var yCor: Float = 0f
+    var xCor: Float = -100f,
+    var yCor: Float = -100f
 )

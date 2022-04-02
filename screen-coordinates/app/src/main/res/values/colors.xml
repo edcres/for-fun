@@ -9,5 +9,6 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="main">#FFC767</color>
+    <color name="circle_color">#604E2F</color>
     <color name="transparent">#00000000</color>
 </resources>

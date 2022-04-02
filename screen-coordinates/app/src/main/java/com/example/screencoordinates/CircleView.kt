@@ -1,23 +1,27 @@
 package com.example.screencoordinates
 
-import android.R.attr
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
 import android.view.MotionEvent
 import android.view.View
+import androidx.core.content.ContextCompat
 
-class CircleView(context: Context?, private val touchCoordinates: TouchCoordinates) : View(context) {
-    var mBitmap: Bitmap
-    var paint: Paint
+class CircleView(
+    context: Context?, private val touchCoordinates: TouchCoordinates
+) : View(context) {
+
+    var mBitmap: Bitmap = Bitmap.createBitmap(400, 800, Bitmap.Config.ARGB_8888)
+    private var paint: Paint = Paint()
+
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         canvas.drawCircle(touchCoordinates.xCor, touchCoordinates.yCor, 50f, paint)
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
+        performClick()
         if (event.action == MotionEvent.ACTION_DOWN) {
             touchCoordinates.xCor = event.x
             touchCoordinates.yCor = event.y
@@ -26,10 +30,12 @@ class CircleView(context: Context?, private val touchCoordinates: TouchCoordinat
         return false
     }
 
+    override fun performClick(): Boolean {
+        return super.performClick()
+    }
+
     init {
-        mBitmap = Bitmap.createBitmap(400, 800, Bitmap.Config.ARGB_8888)
-        paint = Paint()
-        paint.color = Color.RED
+        paint.color = ContextCompat.getColor(context!!, R.color.circle_color)
         paint.style = Paint.Style.FILL
     }
 }
