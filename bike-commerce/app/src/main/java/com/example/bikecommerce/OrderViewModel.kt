@@ -8,11 +8,11 @@ import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-private const val PRICE_FOR_SAME_DAY_DELIVERY = 20.00
-private const val MOUNTAIN_BIKE = "mountain"
-private const val BMX_BIKE = "bmx"
-private const val ROAD_BIKE = "road"
-private const val CRUISER_BIKE = "cruiser"
+//private const val PRICE_FOR_SAME_DAY_DELIVERY = 20.00
+//private const val MOUNTAIN_BIKE = "mountain"
+//private const val BMX_BIKE = "bmx"
+//private const val ROAD_BIKE = "road"
+//private const val CRUISER_BIKE = "cruiser"
 
 class OrderViewModel: ViewModel() {
 
@@ -24,6 +24,14 @@ class OrderViewModel: ViewModel() {
     // format price according to the respective country
     val price: LiveData<String> = Transformations.map(_price) {
         NumberFormat.getCurrencyInstance().format(it)
+    }
+
+    companion object {
+        const val PRICE_FOR_SAME_DAY_DELIVERY = 20.00
+        const val MOUNTAIN_BIKE = "mountain"
+        const val BMX_BIKE = "bmx"
+        const val ROAD_BIKE = "road"
+        const val CRUISER_BIKE = "cruiser"
     }
 
     val bikesAndPrices = mapOf(
@@ -39,7 +47,7 @@ class OrderViewModel: ViewModel() {
         resetOrder()
     }
 
-    fun setFlavor(desiredType: String) {
+    fun setBikeType(desiredType: String) {
         _bikeType.value = desiredType
     }
 

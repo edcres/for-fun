@@ -23,4 +23,16 @@ class BikeTypeFragment : Fragment() {
         binding = fragmentBinding
         return fragmentBinding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding?.apply {
+            lifecycleOwner = viewLifecycleOwner
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding= null
+    }
 }
