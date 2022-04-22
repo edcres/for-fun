@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_nav"
+    app:startDestination="@id/startFragment">
+
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.example.bikecommerce.StartFragment"
+        android:label="fragment_start"
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_startFragment_to_bikeTypeFragment"
+            app:destination="@id/bikeTypeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bikeTypeFragment"
+        android:name="com.example.bikecommerce.BikeTypeFragment"
+        android:label="fragment_bike_type"
+        tools:layout="@layout/fragment_bike_type" >
+        <action
+            android:id="@+id/action_bikeTypeFragment_to_deliveryFragment"
+            app:destination="@id/deliveryFragment" />
+        <action
+            android:id="@+id/action_bikeTypeFragment_to_startFragment"
+            app:destination="@id/startFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/deliveryFragment"
+        android:name="com.example.bikecommerce.DeliveryFragment"
+        android:label="fragment_delivery"
+        tools:layout="@layout/fragment_delivery" >
+        <action
+            android:id="@+id/action_deliveryFragment_to_summaryFragment"
+            app:destination="@id/summaryFragment" />
+        <action
+            android:id="@+id/action_deliveryFragment_to_startFragment"
+            app:destination="@id/startFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/summaryFragment"
+        android:name="com.example.bikecommerce.SummaryFragment"
+        android:label="fragment_summary"
+        tools:layout="@layout/fragment_summary" >
+        <action
+            android:id="@+id/action_summaryFragment_to_startFragment"
+            app:destination="@id/startFragment" />
+    </fragment>
+</navigation>
