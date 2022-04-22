@@ -14,7 +14,7 @@
         <ImageView
             android:id="@+id/road_bike_img"
             android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_height="120dp"
             android:layout_gravity="center_horizontal"
             android:importantForAccessibility="no"
             android:scaleType="center"
@@ -26,7 +26,7 @@
         <ImageView
             android:id="@+id/mountain_bike_img"
             android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_height="120dp"
             android:layout_gravity="center_horizontal"
             android:importantForAccessibility="no"
             android:scaleType="center"
@@ -37,7 +37,7 @@
         <ImageView
             android:id="@+id/cruse_bike_img"
             android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_height="120dp"
             android:layout_gravity="center_horizontal"
             android:importantForAccessibility="no"
             android:scaleType="center"
@@ -48,7 +48,7 @@
         <ImageView
             android:id="@+id/bmx_bike_img"
             android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_height="120dp"
             android:layout_gravity="center_horizontal"
             android:importantForAccessibility="no"
             android:scaleType="center"
@@ -70,32 +70,29 @@
                 android:id="@+id/road_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:layout_marginBottom="50dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginBottom="5dp"
                 android:text="Road Bike" />
 
             <RadioButton
                 android:id="@+id/mountain_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:layout_marginBottom="50dp"
+                android:layout_marginTop="70dp"
                 android:text="Mountain Bike" />
 
             <RadioButton
                 android:id="@+id/cruiser_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:layout_marginBottom="50dp"
+                android:layout_marginTop="70dp"
                 android:text="Cruiser Bike" />
 
             <RadioButton
                 android:id="@+id/bmx_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginTop="70dp"
                 android:text="BMX Bike" />
 
         </RadioGroup>
@@ -109,7 +106,7 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bike_type_group" />
+            app:layout_constraintTop_toBottomOf="@id/bmx_bike_img" />
 
         <TextView
             android:id="@+id/subtotal"
