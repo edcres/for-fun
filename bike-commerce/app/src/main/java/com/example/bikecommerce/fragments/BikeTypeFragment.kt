@@ -5,15 +5,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import com.example.bikecommerce.OrderViewModel
 import com.example.bikecommerce.R
+import com.example.bikecommerce.databinding.FragmentBikeTypeBinding
 
 class BikeTypeFragment : Fragment() {
+
+    private var binding: FragmentBikeTypeBinding? = null
+    private val sharedViewModel: OrderViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bike_type, container, false)
+        val fragmentBinding = FragmentBikeTypeBinding.inflate(inflater, container, false)
+        binding = fragmentBinding
+        return fragmentBinding.root
     }
 }

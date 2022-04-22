@@ -1,151 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.BikeTypeFragment"
-    android:background="@color/primary">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragments.BikeTypeFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@color/primary">
 
-        <ImageView
-            android:id="@+id/road_bike_img"
-            android:layout_width="150dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center_horizontal"
-            android:importantForAccessibility="no"
-            android:scaleType="center"
-            android:layout_marginStart="24dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_road_bike" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/mountain_bike_img"
-            android:layout_width="150dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center_horizontal"
-            android:importantForAccessibility="no"
-            android:scaleType="center"
-            app:layout_constraintStart_toStartOf="@+id/road_bike_img"
-            app:layout_constraintTop_toBottomOf="@+id/road_bike_img"
-            app:srcCompat="@drawable/ic_mountain_bike" />
+            <ImageView
+                android:id="@+id/road_bike_img"
+                android:layout_width="150dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="24dp"
+                android:importantForAccessibility="no"
+                android:scaleType="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_road_bike" />
 
-        <ImageView
-            android:id="@+id/cruse_bike_img"
-            android:layout_width="150dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center_horizontal"
-            android:importantForAccessibility="no"
-            android:scaleType="center"
-            app:layout_constraintStart_toStartOf="@+id/road_bike_img"
-            app:layout_constraintTop_toBottomOf="@+id/mountain_bike_img"
-            app:srcCompat="@drawable/ic_cruise_bike" />
+            <ImageView
+                android:id="@+id/mountain_bike_img"
+                android:layout_width="150dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center_horizontal"
+                android:importantForAccessibility="no"
+                android:scaleType="center"
+                app:layout_constraintStart_toStartOf="@+id/road_bike_img"
+                app:layout_constraintTop_toBottomOf="@+id/road_bike_img"
+                app:srcCompat="@drawable/ic_mountain_bike" />
 
-        <ImageView
-            android:id="@+id/bmx_bike_img"
-            android:layout_width="150dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center_horizontal"
-            android:importantForAccessibility="no"
-            android:scaleType="center"
-            app:layout_constraintStart_toStartOf="@+id/road_bike_img"
-            app:layout_constraintTop_toBottomOf="@+id/cruse_bike_img"
-            app:srcCompat="@drawable/ic_bmx_bike" />
+            <ImageView
+                android:id="@+id/cruse_bike_img"
+                android:layout_width="150dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center_horizontal"
+                android:importantForAccessibility="no"
+                android:scaleType="center"
+                app:layout_constraintStart_toStartOf="@+id/road_bike_img"
+                app:layout_constraintTop_toBottomOf="@+id/mountain_bike_img"
+                app:srcCompat="@drawable/ic_cruise_bike" />
 
-        <RadioGroup
-            android:id="@+id/bike_type_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginStart="24dp"
-            android:orientation="vertical"
-            app:layout_constraintStart_toEndOf="@+id/road_bike_img"
-            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/bmx_bike_img"
+                android:layout_width="150dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center_horizontal"
+                android:importantForAccessibility="no"
+                android:scaleType="center"
+                app:layout_constraintStart_toStartOf="@+id/road_bike_img"
+                app:layout_constraintTop_toBottomOf="@+id/cruse_bike_img"
+                app:srcCompat="@drawable/ic_bmx_bike" />
 
-            <RadioButton
-                android:id="@+id/road_btn"
+            <RadioGroup
+                android:id="@+id/bike_type_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
-                android:layout_marginBottom="5dp"
-                android:text="Road Bike" />
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toEndOf="@+id/road_bike_img"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <RadioButton
-                android:id="@+id/mountain_btn"
+                <RadioButton
+                    android:id="@+id/road_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Road Bike" />
+
+                <RadioButton
+                    android:id="@+id/mountain_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="70dp"
+                    android:text="Mountain Bike" />
+
+                <RadioButton
+                    android:id="@+id/cruiser_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="70dp"
+                    android:text="Cruiser Bike" />
+
+                <RadioButton
+                    android:id="@+id/bmx_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="70dp"
+                    android:text="BMX Bike" />
+
+            </RadioGroup>
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="?attr/dividerHorizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bmx_bike_img" />
+
+            <TextView
+                android:id="@+id/subtotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
-                android:text="Mountain Bike" />
+                android:layout_marginTop="16dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider" />
 
-            <RadioButton
-                android:id="@+id/cruiser_btn"
-                android:layout_width="wrap_content"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cancel_button"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
-                android:text="Cruiser Bike" />
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="cancel"
+                app:layout_constraintEnd_toStartOf="@id/next_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/next_button" />
 
-            <RadioButton
-                android:id="@+id/bmx_btn"
-                android:layout_width="wrap_content"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/next_button"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
-                android:text="BMX Bike" />
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="next"
+                android:textColor="@color/primary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/cancel_button"
+                app:layout_constraintTop_toBottomOf="@id/subtotal" />
 
-        </RadioGroup>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/next_button" />
 
-        <View
-            android:id="@+id/divider"
-            android:background="?attr/dividerHorizontal"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bmx_bike_img" />
-
-        <TextView
-            android:id="@+id/subtotal"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/cancel_button"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="cancel"
-            app:layout_constraintEnd_toStartOf="@id/next_button"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/next_button" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/next_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:textColor="@color/primary"
-            android:text="next"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/cancel_button"
-            app:layout_constraintTop_toBottomOf="@id/subtotal" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="300dp"
-            app:layout_constraintTop_toBottomOf="@id/next_button"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
