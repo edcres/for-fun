@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/startFragment"
-        android:name="com.example.bikecommerce.StartFragment"
+        android:name="com.example.bikecommerce.fragments.StartFragment"
         android:label="fragment_start"
         tools:layout="@layout/fragment_start" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/bikeTypeFragment"
-        android:name="com.example.bikecommerce.BikeTypeFragment"
+        android:name="com.example.bikecommerce.fragments.BikeTypeFragment"
         android:label="fragment_bike_type"
         tools:layout="@layout/fragment_bike_type" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/deliveryFragment"
-        android:name="com.example.bikecommerce.DeliveryFragment"
+        android:name="com.example.bikecommerce.fragments.DeliveryFragment"
         android:label="fragment_delivery"
         tools:layout="@layout/fragment_delivery" >
         <action
@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/summaryFragment"
-        android:name="com.example.bikecommerce.SummaryFragment"
+        android:name="com.example.bikecommerce.fragments.SummaryFragment"
         android:label="fragment_summary"
         tools:layout="@layout/fragment_summary" >
         <action

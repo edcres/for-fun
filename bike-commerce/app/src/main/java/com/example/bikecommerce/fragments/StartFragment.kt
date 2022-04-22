@@ -1,4 +1,4 @@
-package com.example.bikecommerce
+package com.example.bikecommerce.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
