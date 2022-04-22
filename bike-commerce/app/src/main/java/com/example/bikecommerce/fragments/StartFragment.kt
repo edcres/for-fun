@@ -30,7 +30,7 @@ class StartFragment : Fragment() {
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
             beginOrderBtn.setOnClickListener {
-                sharedViewModel.setBikeType(OrderViewModel.MOUNTAIN_BIKE)
+                sharedViewModel.setBikeType(OrderViewModel.ROAD_BIKE)
                 findNavController().navigate(R.id.action_startFragment_to_bikeTypeFragment)
             }
         }

@@ -10,7 +10,7 @@
         <entry key="app/src/main/res/drawable/ic_mountain_bike.xml" value="0.139" />
         <entry key="app/src/main/res/drawable/ic_road_bike.xml" value="0.2045" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29583333333333334" />
-        <entry key="app/src/main/res/layout/fragment_bike_type.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_bike_type.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_delivery.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_start.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_summary.xml" value="0.3098958333333333" />
