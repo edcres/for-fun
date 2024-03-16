@@ -1,0 +1,15 @@
+C:\Users\cresp\developer\projects\for-fun\refresh-rate-change\bin\Debug\net8.0-windows\refresh-rate-change.exe
+C:\Users\cresp\developer\projects\for-fun\refresh-rate-change\bin\Debug\net8.0-windows\refresh-rate-change.deps.json
+C:\Users\cresp\developer\projects\for-fun\refresh-rate-change\bin\Debug\net8.0-windows\refresh-rate-change.runtimeconfig.json
+C:\Users\cresp\developer\projects\for-fun\refresh-rate-change\bin\Debug\net8.0-windows\refresh-rate-change.dll
+C:\Users\cresp\developer\projects\for-fun\refresh-rate-change\bin\Debug\net8.0-windows\refresh-rate-change.pdb
+C:\Users\cresp\developer\projects\for-fun\refresh-rate-change\obj\Debug\net8.0-windows\refresh-rate-change.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cresp\developer\projects\for-fun\refresh-rate-change\obj\Debug\net8.0-windows\refresh-rate-change.AssemblyInfoInputs.cache
+C:\Users\cresp\developer\projects\for-fun\refresh-rate-change\obj\Debug\net8.0-windows\refresh-rate-change.AssemblyInfo.cs
+C:\Users\cresp\developer\projects\for-fun\refresh-rate-change\obj\Debug\net8.0-windows\refresh-rate-change.csproj.CoreCompileInputs.cache
+C:\Users\cresp\developer\projects\for-fun\refresh-rate-change\obj\Debug\net8.0-windows\refresh-rate-change.sourcelink.json
+C:\Users\cresp\developer\projects\for-fun\refresh-rate-change\obj\Debug\net8.0-windows\refresh-rate-change.dll
+C:\Users\cresp\developer\projects\for-fun\refresh-rate-change\obj\Debug\net8.0-windows\refint\refresh-rate-change.dll
+C:\Users\cresp\developer\projects\for-fun\refresh-rate-change\obj\Debug\net8.0-windows\refresh-rate-change.pdb
+C:\Users\cresp\developer\projects\for-fun\refresh-rate-change\obj\Debug\net8.0-windows\refresh-rate-change.genruntimeconfig.cache
+C:\Users\cresp\developer\projects\for-fun\refresh-rate-change\obj\Debug\net8.0-windows\ref\refresh-rate-change.dll
