@@ -62,6 +62,7 @@ namespace DisplaySettingsListener
         {
             // This is where you could add code to check and adjust the refresh rate if needed
             Console.WriteLine("Display settings changed.");
+            CheckRefreshRate();
         }
 
         private static void CheckRefreshRate()
