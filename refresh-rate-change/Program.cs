@@ -9,6 +9,13 @@ namespace DisplaySettingsListener
         [DllImport("user32.dll")]
         public static extern bool EnumDisplaySettings(string deviceName, int modeNum, ref DEVMODE devMode);
 
+        [DllImport("user32.dll")]
+        public static extern int ChangeDisplaySettings(ref DEVMODE devMode, int flags);
+
+        public const int ENUM_CURRENT_SETTINGS = -1;
+        public const int CDS_UPDATEREGISTRY = 0x01;
+        public const int DISP_CHANGE_SUCCESSFUL = 0;
+
         [StructLayout(LayoutKind.Sequential)]
         public struct DEVMODE
         {
@@ -62,20 +69,23 @@ namespace DisplaySettingsListener
         {
             // This is where you could add code to check and adjust the refresh rate if needed
             Console.WriteLine("Display settings changed.");
-            CheckRefreshRate();
+            EditRefreshRate();
         }
 
-        private static void CheckRefreshRate()
+        private static void EditRefreshRate()
         {
             DEVMODE devMode = new DEVMODE();
             devMode.dmSize = (short)Marshal.SizeOf(typeof(DEVMODE));
 
-            if (EnumDisplaySettings(null, -1, ref devMode))
+            // if (EnumDisplaySettings(null, -1, ref devMode))
+            if (EnumDisplaySettings(null, ENUM_CURRENT_SETTINGS, ref devMode))
             {
                 Console.WriteLine($"Current Refresh Rate: {devMode.dmDisplayFrequency}Hz");
                 if (devMode.dmDisplayFrequency == 144)
                 {
                     Console.WriteLine("The refresh rate is 144Hz.");
+                    devMode.dmDisplayFrequency = 60;
+                    int result = ChangeDisplaySettings(ref devMode, CDS_UPDATEREGISTRY);
                 }
                 else if (devMode.dmDisplayFrequency == 60)
                 {
