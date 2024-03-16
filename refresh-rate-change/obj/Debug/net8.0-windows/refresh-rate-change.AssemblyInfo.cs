@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("refresh-rate-change")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2bfbb0e2c2cf7a92295d4e84a379ce90d2b33dc3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+104b75789d7714ea28770e1123272bf2a7ed1639")]
 [assembly: System.Reflection.AssemblyProductAttribute("refresh-rate-change")]
 [assembly: System.Reflection.AssemblyTitleAttribute("refresh-rate-change")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
