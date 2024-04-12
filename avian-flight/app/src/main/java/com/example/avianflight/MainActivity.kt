@@ -11,4 +11,3 @@ class MainActivity : AppCompatActivity() {
         setContentView(gameView)
     }
 }
-// TODO: handle this '?'

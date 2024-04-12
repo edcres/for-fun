@@ -5,14 +5,7 @@ class Scratch {
 
 
 
-
-
-
-
-
-
-
-
+// TODO: handle this '?'
 // just the bird falling up
 //
 //import android.content.Context
