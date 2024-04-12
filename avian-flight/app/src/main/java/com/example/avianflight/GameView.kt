@@ -21,7 +21,7 @@ class GameView(context: Context) : View(context) {
         super.onDraw(canvas)
 
         // Apply gravity effect
-        birdVelocity += gravity
+        birdVelocity -= gravity
 
         // Update bird's position
         birdY -= birdVelocity  // Subtracting because going up decreases the Y value
