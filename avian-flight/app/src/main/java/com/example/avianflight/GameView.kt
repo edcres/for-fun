@@ -6,7 +6,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewTreeObserver
 import java.util.*
-import kotlin.collections.ArrayList
 
 class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayoutListener {
     private var birdY: Float = 100f
@@ -15,8 +14,9 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     private val pipePaint: Paint = Paint().apply { color = Color.GREEN }
     private val gravity: Float = -0.5f  // Upward acceleration due to gravity
     private val jumpVelocity: Float = 10f  // Downward velocity on jump
+    private val birdRadius: Float = 20f  // Radius of the bird
 
-    private var pipes = ArrayList<Pipe>()
+    private var pipes = mutableListOf<Pipe>()  // Pipes are now a MutableList
     private val pipeWidth: Float = 150f
     private val pipeGap: Float = 300f
     private val pipeSpeed: Float = 4f
@@ -54,11 +54,9 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
 
         birdVelocity -= gravity
         birdY -= birdVelocity
-        canvas?.drawCircle(100f, birdY, 20f, birdPaint)
+        canvas?.drawCircle(100f, birdY, birdRadius, birdPaint)
 
         val iterator = pipes.iterator()
-        val newPipesToAdd = mutableListOf<Pipe>()
-
         while (iterator.hasNext()) {
             val pipe = iterator.next()
             pipe.x -= pipeSpeed
@@ -67,15 +65,13 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
             if (pipe.x + pipeWidth < 0) {
                 iterator.remove()
                 val newX = width + 100f
-                newPipesToAdd.add(Pipe(newX, 0f, randomGapTop()))
-                newPipesToAdd.add(Pipe(newX, randomGapBottom(), height.toFloat()))
+                pipes.add(Pipe(newX, 0f, randomGapTop()))
+                pipes.add(Pipe(newX, randomGapBottom(), height.toFloat()))
             }
         }
 
-        // Add all collected new pipes here
-        pipes.addAll(newPipesToAdd)
-
         if (checkCollision()) {
+            // Handle collision, e.g., end game or reset
             birdY = height / 2f
             birdVelocity = 5f
         }
@@ -84,9 +80,15 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     }
 
     private fun checkCollision(): Boolean {
-        return pipes.any { pipe ->
-            100f in pipe.x..(pipe.x + pipeWidth) && (birdY <= pipe.bottom || birdY >= pipe.top)
+        // Simple bounding box collision detection
+        for (pipe in pipes) {
+            if (pipe.x < 100f + birdRadius && pipe.x + pipeWidth > 100f - birdRadius) {
+                if (birdY - birdRadius < pipe.bottom || birdY + birdRadius > pipe.top) {
+                    return true  // Collision detected
+                }
+            }
         }
+        return false  // No collision
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
