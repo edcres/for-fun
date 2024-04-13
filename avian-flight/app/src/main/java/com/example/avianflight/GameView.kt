@@ -4,10 +4,9 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewTreeObserver
 import java.util.*
 import kotlin.collections.ArrayList
-import android.view.ViewTreeObserver
-
 
 class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayoutListener {
     private var birdY: Float = 100f
@@ -28,22 +27,19 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     }
 
     override fun onGlobalLayout() {
-        // Ensure we only initialize once and then remove the listener
         viewTreeObserver.removeOnGlobalLayoutListener(this)
         initializePipes()
     }
 
     private fun initializePipes() {
-        // Initialize pipes at intervals
         for (i in 1..2) {
-            val initialX = i * 500f + width  // Start off-screen to the right
-            pipes.add(Pipe(initialX, 0f, randomGapTop()))  // Top pipe
-            pipes.add(Pipe(initialX, randomGapBottom(), height.toFloat()))  // Bottom pipe
+            val initialX = i * 500f + width
+            pipes.add(Pipe(initialX, 0f, randomGapTop()))
+            pipes.add(Pipe(initialX, randomGapBottom(), height.toFloat()))
         }
     }
 
     private fun randomGapTop(): Float {
-        // Ensures that the calculation is always positive
         val bound = (height - pipeGap).coerceAtLeast(1f).toInt()
         return Random().nextInt(bound).toFloat()
     }
@@ -56,45 +52,38 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-        // Update bird's position due to gravity
         birdVelocity -= gravity
         birdY -= birdVelocity
-
-        // Draw bird
         canvas?.drawCircle(100f, birdY, 20f, birdPaint)
 
-        // Move and draw pipes
         val iterator = pipes.iterator()
+        val newPipesToAdd = mutableListOf<Pipe>()
+
         while (iterator.hasNext()) {
             val pipe = iterator.next()
             pipe.x -= pipeSpeed
-
-            // Draw pipe
             canvas?.drawRect(pipe.x, pipe.top, pipe.x + pipeWidth, pipe.bottom, pipePaint)
 
-            // Remove pipe if it's off-screen
             if (pipe.x + pipeWidth < 0) {
                 iterator.remove()
-                // Add new pipes to replace the old ones
-                val newX = width + 100f  // New pipe starts off-screen
-                pipes.add(Pipe(newX, 0f, randomGapTop()))  // Top pipe
-                pipes.add(Pipe(newX, randomGapBottom(), height.toFloat()))  // Bottom pipe
+                val newX = width + 100f
+                newPipesToAdd.add(Pipe(newX, 0f, randomGapTop()))
+                newPipesToAdd.add(Pipe(newX, randomGapBottom(), height.toFloat()))
             }
         }
 
-        // Check for collisions
+        // Add all collected new pipes here
+        pipes.addAll(newPipesToAdd)
+
         if (checkCollision()) {
-            // Handle collision (game over or reset bird position)
             birdY = height / 2f
             birdVelocity = 5f
         }
 
-        // Ensure the animation continues
         postInvalidateOnAnimation()
     }
 
     private fun checkCollision(): Boolean {
-        // Collision logic between bird and pipes
         return pipes.any { pipe ->
             100f in pipe.x..(pipe.x + pipeWidth) && (birdY <= pipe.bottom || birdY >= pipe.top)
         }
@@ -102,7 +91,6 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if (event?.action == MotionEvent.ACTION_DOWN) {
-            // On touch, bird jumps down
             birdVelocity = -jumpVelocity
         }
         return true
