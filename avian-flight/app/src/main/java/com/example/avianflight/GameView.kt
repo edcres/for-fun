@@ -18,8 +18,9 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
 
     private var pipes = mutableListOf<Pipe>()
     private val pipeWidth: Float = 150f
-    private val pipeGap: Float = 100f
+    private val pipeYGap: Float = 100f
     private val pipeSpeed: Float = 4f
+    private val gapXPipe: Float = 500f
 
     init {
         birdVelocity = 5f  // Initial upward movement
@@ -33,20 +34,20 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
 
     private fun initializePipes() {
         for (i in 1..2) {
-            val initialX = i * 500f + width
-            pipes.add(Pipe(initialX, 0f, randomGapTop()))
-            pipes.add(Pipe(initialX, randomGapBottom(), height.toFloat()))
+            val initialXGap = i * gapXPipe + 650
+            pipes.add(Pipe(initialXGap, 0f, randomGapTop()))
+            pipes.add(Pipe(initialXGap, randomGapBottom(), height.toFloat()))
         }
     }
 
     private fun randomGapTop(): Float {
-        val bound = (height - pipeGap).coerceAtLeast(1f).toInt()
+        val bound = (height - pipeYGap).coerceAtLeast(1f).toInt()
         return Random().nextInt(bound).toFloat()
     }
 
     private fun randomGapBottom(): Float {
         val top = randomGapTop()
-        return top + pipeGap
+        return top + pipeYGap
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -66,9 +67,9 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
 
             if (pipe.x + pipeWidth < 0) {
                 iterator.remove()
-                val newX = width + 100f
-                newPipes.add(Pipe(newX, 0f, randomGapTop()))
-                newPipes.add(Pipe(newX, randomGapBottom(), height.toFloat()))
+                val xGap = gapXPipe + 2 * pipeWidth + (pipeWidth/4)
+                newPipes.add(Pipe(xGap, 0f, randomGapTop()))
+                newPipes.add(Pipe(xGap, randomGapBottom(), height.toFloat()))
             }
         }
 
