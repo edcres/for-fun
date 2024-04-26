@@ -11,8 +11,9 @@ import android.view.ViewTreeObserver
 import java.util.*
 
 class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayoutListener {
+    private var gameStarted = false
     private var testCounter = 0 // debug
-    private var birdY: Float = 100f
+    private var birdY: Float = 700f
     private var birdVelocity: Float = 0f
     private val birdPaint: Paint = Paint().apply { color = Color.RED }
     private val pipePaint: Paint = Paint().apply { color = Color.GREEN }
@@ -58,9 +59,13 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
         super.onDraw(canvas)
         Log.d("TAGTest", "onDraw: called $testCounter")
         testCounter++
-        birdVelocity -= gravity
-        birdY -= birdVelocity
-        canvas?.drawCircle(100f, birdY, birdRadius, birdPaint)
+
+        // Draw bird
+        if (gameStarted) {
+            birdVelocity -= gravity
+            birdY -= birdVelocity
+            canvas?.drawCircle(100f, birdY, birdRadius, birdPaint)
+        }
 
         // TODO:
         //  - make it so when the first, and one every 3 pipes
@@ -111,6 +116,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
+        if (!gameStarted) gameStarted = true
         if (event?.action == MotionEvent.ACTION_DOWN) {
             birdVelocity = -jumpVelocity
         }
