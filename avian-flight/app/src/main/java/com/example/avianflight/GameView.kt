@@ -17,9 +17,8 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     private val birdRadius: Float = 20f  // Radius of the bird
 
     private var pipes = mutableListOf<Pipe>()
-    private var newPipes = mutableListOf<Pipe>()
     private val pipeWidth: Float = 150f
-    private val pipeGap: Float = 300f
+    private val pipeGap: Float = 100f
     private val pipeSpeed: Float = 4f
 
     init {
@@ -53,6 +52,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
+        val newPipes = mutableListOf<Pipe>()
         birdVelocity -= gravity
         birdY -= birdVelocity
         canvas?.drawCircle(100f, birdY, birdRadius, birdPaint)

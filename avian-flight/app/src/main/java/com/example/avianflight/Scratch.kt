@@ -1,5 +1,14 @@
 package com.example.avianflight
 
+//gap every 2 pipes
+//gap between pipes
+//ball stops at edge
+//
+//game stops when ball stops
+//take out top bar
+//gets very laggy after like 6 pipes
+
+
 class Scratch {
 }
 
