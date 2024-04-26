@@ -16,7 +16,8 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     private val jumpVelocity: Float = 10f  // Downward velocity on jump
     private val birdRadius: Float = 20f  // Radius of the bird
 
-    private var pipes = mutableListOf<Pipe>()  // Pipes are now a MutableList
+    private var pipes = mutableListOf<Pipe>()
+    private var newPipes = mutableListOf<Pipe>()
     private val pipeWidth: Float = 150f
     private val pipeGap: Float = 300f
     private val pipeSpeed: Float = 4f
@@ -56,6 +57,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
         birdY -= birdVelocity
         canvas?.drawCircle(100f, birdY, birdRadius, birdPaint)
 
+        // Perform operations on pipes
         val iterator = pipes.iterator()
         while (iterator.hasNext()) {
             val pipe = iterator.next()
@@ -65,10 +67,14 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
             if (pipe.x + pipeWidth < 0) {
                 iterator.remove()
                 val newX = width + 100f
-                pipes.add(Pipe(newX, 0f, randomGapTop()))
-                pipes.add(Pipe(newX, randomGapBottom(), height.toFloat()))
+                newPipes.add(Pipe(newX, 0f, randomGapTop()))
+                newPipes.add(Pipe(newX, randomGapBottom(), height.toFloat()))
             }
         }
+
+        // Add new pipes only after iteration is complete
+        pipes.addAll(newPipes)
+        newPipes.clear()
 
         if (checkCollision()) {
             // Handle collision, e.g., end game or reset
@@ -80,7 +86,6 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     }
 
     private fun checkCollision(): Boolean {
-        // Simple bounding box collision detection
         for (pipe in pipes) {
             if (pipe.x < 100f + birdRadius && pipe.x + pipeWidth > 100f - birdRadius) {
                 if (birdY - birdRadius < pipe.bottom || birdY + birdRadius > pipe.top) {
