@@ -11,7 +11,7 @@ import android.view.ViewTreeObserver
 import java.util.*
 
 class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayoutListener {
-    private var gameStarted = false
+    private var gameOn = false
     private var testCounter = 0 // debug
     private var birdY: Float = 700f
     private var birdVelocity: Float = 5f
@@ -60,42 +60,66 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
         testCounter++
 
         // Draw bird
-        if (gameStarted) {
+        if (gameOn) {
             birdVelocity -= gravity
             birdY -= birdVelocity
             canvas?.drawCircle(100f, birdY, birdRadius, birdPaint)
+
+            // TODO:
+            //  - make it so when the first, and one every 3 pipes
+            //     after is off screen, a new one is created
+            // Add Pipe
+            val newPipes = mutableListOf<Pipe>()
+            val iterator = pipes.iterator()
+            while (iterator.hasNext()) {
+                val pipe = iterator.next()
+                pipe.x -= pipeSpeed
+                canvas?.drawRect(pipe.x, pipe.top, pipe.x + pipeWidth, pipe.bottom, pipePaint)
+
+                if (pipe.x + pipeWidth < 0) {
+                    iterator.remove()
+                    val xGap = gapXPipe + 2 * pipeWidth + (pipeWidth / 4)
+                    newPipes.add(Pipe(xGap, 0f, randomGapTop()))
+                    newPipes.add(Pipe(xGap, randomGapBottom(), height.toFloat()))
+                }
+            }
+
+            // Add new pipes only after iteration is complete
+            pipes.addAll(newPipes)
+            Log.d("TAGTest2", "onDraw: ${pipes.size}")
+            newPipes.clear()
+        } else {
+            canvas?.drawCircle(100f, birdY, birdRadius, birdPaint)
+
+            // TODO:
+            //  - make it so when the first, and one every 3 pipes
+            //     after is off screen, a new one is created
+            // Add Pipe
+            val newPipes = mutableListOf<Pipe>()
+            val iterator = pipes.iterator()
+            while (iterator.hasNext()) {
+                val pipe = iterator.next()
+                canvas?.drawRect(pipe.x, pipe.top, pipe.x + pipeWidth, pipe.bottom, pipePaint)
+
+                if (pipe.x + pipeWidth < 0) {
+                    iterator.remove()
+                    val xGap = gapXPipe + 2 * pipeWidth + (pipeWidth / 4)
+                    newPipes.add(Pipe(xGap, 0f, randomGapTop()))
+                    newPipes.add(Pipe(xGap, randomGapBottom(), height.toFloat()))
+                }
+            }
+
+            // Add new pipes only after iteration is complete
+            pipes.addAll(newPipes)
+            Log.d("TAGTest2", "onDraw: ${pipes.size}")
+            newPipes.clear()
         }
-
-        // TODO:
-        //  - make it so when the first, and one every 3 pipes
-        //     after is off screen, a new one is created
-        // Add Pipe
-//        val newPipes = mutableListOf<Pipe>()
-//        val iterator = pipes.iterator()
-//        while (iterator.hasNext()) {
-//            val pipe = iterator.next()
-//            pipe.x -= pipeSpeed
-//            canvas?.drawRect(pipe.x, pipe.top, pipe.x + pipeWidth, pipe.bottom, pipePaint)
-//
-//            if (pipe.x + pipeWidth < 0) {
-//                iterator.remove()
-//                val xGap = gapXPipe + 2 * pipeWidth + (pipeWidth/4)
-//                newPipes.add(Pipe(xGap, 0f, randomGapTop()))
-//                newPipes.add(Pipe(xGap, randomGapBottom(), height.toFloat()))
-//            }
-//        }
-//
-//        // Add new pipes only after iteration is complete
-//        pipes.addAll(newPipes)
-//        Log.d("TAGTest2", "onDraw: ${pipes.size}")
-//        newPipes.clear()
-
-
 
         if (collisionDetected()) {
             // Handle collision, e.g., end game or reset
             birdY = height / 2f
             birdVelocity = 5f
+            gameOn = false
         }
 
         postInvalidateOnAnimation()
@@ -103,6 +127,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
 
     private fun collisionDetected(): Boolean {
         // Pipe collision
+        // TODO: fix pipe collision
         for (pipe in pipes) {
             if (pipe.x < 100f + birdRadius && pipe.x + pipeWidth > 100f - birdRadius) {
                 if (birdY - birdRadius < pipe.bottom || birdY + birdRadius > pipe.top) {
@@ -110,12 +135,13 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
                 }
             }
         }
-        // Floor ceiling collision
-        return false  // No collision
+        // Floor or ceiling collision
+
+        return false
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        if (!gameStarted) gameStarted = true
+        if (!gameOn) gameOn = true
         if (event?.action == MotionEvent.ACTION_DOWN) {
             birdVelocity = -jumpVelocity
         }
