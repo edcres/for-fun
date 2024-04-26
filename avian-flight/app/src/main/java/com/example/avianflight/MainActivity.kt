@@ -1,6 +1,5 @@
 package com.example.avianflight
 
-import GameView
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 

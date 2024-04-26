@@ -2,11 +2,11 @@ package com.example.avianflight
 
 //gap every 2 pipes
 //gap between pipes
-//ball stops at edge
+//ball stops at edges
 //
 //game stops when ball stops
-//take out top bar
-//gets very laggy after like 6 pipes
+//take out top appbar
+//gets very laggy after like 6 pipes (probably because theres a shitton of pipies after some time)
 
 
 class Scratch {
@@ -22,7 +22,7 @@ class Scratch {
 //import android.view.ViewTreeObserver
 //import java.util.*
 //
-//class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayoutListener {
+//class com.example.avianflight.GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayoutListener {
 //    private var birdY: Float = 100f
 //    private var birdVelocity: Float = 0f
 //    private val birdPaint: Paint = Paint().apply { color = Color.RED }
@@ -123,7 +123,7 @@ class Scratch {
 //import android.view.ViewTreeObserver
 //import java.util.*
 //
-//class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayoutListener {
+//class com.example.avianflight.GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayoutListener {
 //    private var birdY: Float = 100f
 //    private var birdVelocity: Float = 0f
 //    private val birdPaint: Paint = Paint().apply { color = Color.RED }
@@ -233,7 +233,7 @@ class Scratch {
 //import android.view.ViewTreeObserver
 //import java.util.*
 //
-//class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayoutListener {
+//class com.example.avianflight.GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayoutListener {
 //    private var birdY: Float = 100f
 //    private var birdVelocity: Float = 0f
 //    private val birdPaint: Paint = Paint().apply { color = Color.RED }
@@ -340,7 +340,7 @@ class Scratch {
 //import java.util.*
 //import kotlin.collections.ArrayList
 //
-//class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayoutListener {
+//class com.example.avianflight.GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayoutListener {
 //    private var birdY: Float = 100f
 //    private var birdVelocity: Float = 0f
 //    private val birdPaint: Paint = Paint().apply { color = Color.RED }
@@ -454,7 +454,7 @@ class Scratch {
 //import java.util.*
 //import kotlin.collections.ArrayList
 //import android.view.ViewTreeObserver
-//class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayoutListener {
+//class com.example.avianflight.GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayoutListener {
 //    private var birdY: Float = 100f
 //    private var birdVelocity: Float = 0f
 //    private val birdPaint: Paint = Paint().apply { color = Color.RED }
@@ -569,7 +569,7 @@ class Scratch {
 //import android.view.MotionEvent
 //import android.view.View
 //
-//class GameView(context: Context) : View(context) {
+//class com.example.avianflight.GameView(context: Context) : View(context) {
 //    private var birdY: Float = 100f
 //    private var birdVelocity: Float = 0f
 //    private val birdPaint: Paint = Paint().apply { color = Color.RED }

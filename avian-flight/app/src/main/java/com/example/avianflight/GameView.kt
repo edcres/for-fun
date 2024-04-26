@@ -1,13 +1,17 @@
+package com.example.avianflight
+
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewTreeObserver
 import java.util.*
 
 class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayoutListener {
+    private var testCounter = 0 // debug
     private var birdY: Float = 100f
     private var birdVelocity: Float = 0f
     private val birdPaint: Paint = Paint().apply { color = Color.RED }
@@ -33,7 +37,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     }
 
     private fun initializePipes() {
-        for (i in 1..3) {
+        for (i in 1..2) {
             val initialXGap = i * gapXPipe + 650
             pipes.add(Pipe(initialXGap, 0f, randomGapTop()))
             pipes.add(Pipe(initialXGap, randomGapBottom(), height.toFloat()))
@@ -52,29 +56,39 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
+        Log.d("TAGTest", "onDraw: called $testCounter")
+        testCounter++
         birdVelocity -= gravity
         birdY -= birdVelocity
         canvas?.drawCircle(100f, birdY, birdRadius, birdPaint)
 
+        // TODO:
+        //  - make it so when the first, and one every 3 pipes
+        //     after is off screen, a new one is created
         // Add Pipe
-        val newPipes = mutableListOf<Pipe>()
-        val iterator = pipes.iterator()
-        while (iterator.hasNext()) {
-            val pipe = iterator.next()
-            pipe.x -= pipeSpeed
-            canvas?.drawRect(pipe.x, pipe.top, pipe.x + pipeWidth, pipe.bottom, pipePaint)
+//        val newPipes = mutableListOf<Pipe>()
+//        val iterator = pipes.iterator()
+//        while (iterator.hasNext()) {
+//            val pipe = iterator.next()
+//            pipe.x -= pipeSpeed
+//            canvas?.drawRect(pipe.x, pipe.top, pipe.x + pipeWidth, pipe.bottom, pipePaint)
+//
+//            if (pipe.x + pipeWidth < 0) {
+//                iterator.remove()
+//                val xGap = gapXPipe + 2 * pipeWidth + (pipeWidth/4)
+//                newPipes.add(Pipe(xGap, 0f, randomGapTop()))
+//                newPipes.add(Pipe(xGap, randomGapBottom(), height.toFloat()))
+//            }
+//        }
+//
+//        // Add new pipes only after iteration is complete
+//        pipes.addAll(newPipes)
+//        Log.d("TAGTest2", "onDraw: ${pipes.size}")
+//        newPipes.clear()
 
-            if (pipe.x + pipeWidth < 0) {
-                iterator.remove()
-                val xGap = gapXPipe + 2 * pipeWidth + (pipeWidth/4)
-                newPipes.add(Pipe(xGap, 0f, randomGapTop()))
-                newPipes.add(Pipe(xGap, randomGapBottom(), height.toFloat()))
-            }
-        }
 
-        // Add new pipes only after iteration is complete
-        pipes.addAll(newPipes)
-        newPipes.clear()
+
+
 
         if (checkCollision()) {
             // Handle collision, e.g., end game or reset
