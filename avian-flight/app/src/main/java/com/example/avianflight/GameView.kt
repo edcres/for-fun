@@ -14,7 +14,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     private var gameStarted = false
     private var testCounter = 0 // debug
     private var birdY: Float = 700f
-    private var birdVelocity: Float = 0f
+    private var birdVelocity: Float = 5f
     private val birdPaint: Paint = Paint().apply { color = Color.RED }
     private val pipePaint: Paint = Paint().apply { color = Color.GREEN }
     private val gravity: Float = -0.5f  // Upward acceleration due to gravity
@@ -28,7 +28,6 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     private val gapXPipe: Float = 500f
 
     init {
-        birdVelocity = 5f  // Initial upward movement
         viewTreeObserver.addOnGlobalLayoutListener(this)
     }
 
@@ -93,9 +92,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
 
 
 
-
-
-        if (checkCollision()) {
+        if (collisionDetected()) {
             // Handle collision, e.g., end game or reset
             birdY = height / 2f
             birdVelocity = 5f
@@ -104,7 +101,8 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
         postInvalidateOnAnimation()
     }
 
-    private fun checkCollision(): Boolean {
+    private fun collisionDetected(): Boolean {
+        // Pipe collision
         for (pipe in pipes) {
             if (pipe.x < 100f + birdRadius && pipe.x + pipeWidth > 100f - birdRadius) {
                 if (birdY - birdRadius < pipe.bottom || birdY + birdRadius > pipe.top) {
@@ -112,6 +110,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
                 }
             }
         }
+        // Floor ceiling collision
         return false  // No collision
     }
 

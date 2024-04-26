@@ -1,13 +1,13 @@
 package com.example.avianflight
 
-//gap every 2 pipes
-//gap between pipes
 //ball stops at edges
+//gap every 2 pipes
 //
 //game stops when ball stops
 //take out top appbar
 //gets very laggy after like 6 pipes (probably because theres a shitton of pipies after some time)
-
+//
+// make the gravity feel better
 
 class Scratch {
 }
