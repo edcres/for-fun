@@ -33,7 +33,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     }
 
     private fun initializePipes() {
-        for (i in 1..2) {
+        for (i in 1..3) {
             val initialXGap = i * gapXPipe + 650
             pipes.add(Pipe(initialXGap, 0f, randomGapTop()))
             pipes.add(Pipe(initialXGap, randomGapBottom(), height.toFloat()))
@@ -52,13 +52,12 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-
-        val newPipes = mutableListOf<Pipe>()
         birdVelocity -= gravity
         birdY -= birdVelocity
         canvas?.drawCircle(100f, birdY, birdRadius, birdPaint)
 
-        // Perform operations on pipes
+        // Add Pipe
+        val newPipes = mutableListOf<Pipe>()
         val iterator = pipes.iterator()
         while (iterator.hasNext()) {
             val pipe = iterator.next()
