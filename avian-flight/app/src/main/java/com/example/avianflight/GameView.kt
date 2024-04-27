@@ -135,8 +135,8 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
                 }
             }
         }
-        // Floor or ceiling collision
-
+        // Ceiling or Floor Collision
+        if (birdY < (0 + birdRadius) || birdY > (height - birdRadius)) return true
         return false
     }
 

@@ -1,12 +1,11 @@
 package com.example.avianflight
 
-//stop game
-//ball stops at edges
-//gap every 2 pipes
+// ball stops at edges
+// gap every 2 pipes
+// fix pipe collision
 //
-//game stops when ball stops
-//take out top appbar
-//gets very laggy after like 6 pipes (probably because theres a shitton of pipies after some time)
+// take out top appbar
+// gets very laggy after like 6 pipes (probably because theres a shitton of pipies after some time)
 //
 // jump higher
 // make the gravity feel better
