@@ -1,5 +1,7 @@
 package com.example.avianflight
 
+// a shitton of pipes are added when
+//      - one is removed, i only want to add one
 // add pipes correctly
 // gets very laggy after like 6 pipes
 //  - (probably because theres a shitton of pipies after some time)
