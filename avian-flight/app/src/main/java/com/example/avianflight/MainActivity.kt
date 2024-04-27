@@ -8,5 +8,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val gameView = GameView(this)
         setContentView(gameView)
+        supportActionBar?.hide()
     }
 }
