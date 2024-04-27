@@ -1,8 +1,10 @@
 package com.example.avianflight
 
-// Take out top appbar
+// add pipes correctly
+// gets very laggy after like 6 pipes
+//  - (probably because theres a shitton of pipies after some time)
+// fix pipe gap
 // fix pipe collision
-//  - gets very laggy after like 6 pipes (probably because theres a shitton of pipies after some time)
 //
 // jump higher
 // make the gravity feel better
