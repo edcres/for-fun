@@ -59,37 +59,40 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
 //        Log.d("TAGTest1", "onDrawDraw: called $testCounter")
         testCounter++
         val newPipes = mutableListOf<Pipe>()
-        Log.d("TAGTest1", "onDraw: pipes = ${pipes.size}")
+        Log.d("TAGTest1", "onDraw: called: $testCounter pipeSets = ${pipes.size/2}")
         val iterator = pipes.iterator()
         // draw bird
         canvas?.drawCircle(100f, birdY, birdRadius, birdPaint)
         if (gameOn) {
+            var pipeSetRemoved = false
             // Move Bird
             birdVelocity -= gravity
             birdY -= birdVelocity
 
             // Draw Pipes
-//            for(pipe in pipes)
-
             while (iterator.hasNext()) {
                 val pipe = iterator.next()
                 pipe.x -= pipeSpeed
                 canvas?.drawRect(pipe.x, pipe.top, pipe.x + pipeWidth, pipe.bottom, pipePaint)
                 // If pipe left the screen, add new pipe
-                if (pipe.x + pipeWidth < 0) {
+                if (pipe.x + pipeWidth < 0 && !pipeSetRemoved) {
+                    Log.d("TAGTest1B", "onDraw: pipeX = ${pipe.x}; pipeXEnd = ${pipe.x + pipeWidth}")
                     iterator.remove()
-                    // gap1 pipe2 gap2 pipe3 gap3
                     val xGap = 2 * gapXPipe + 2 * pipeWidth
-                    Log.d("TAGTest2", "onDraw: new pipe start = ${xGap}")
-//                    val xGap = 2000f
-//                    val xGap = gapXPipe + 2 * pipeWidth + (pipeWidth / 4)
+                    Log.d("TAGTest2A", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
                     newPipes.add(Pipe(xGap, 0f, randomGapTop()))
                     newPipes.add(Pipe(xGap, randomGapBottom(), height.toFloat()))
+                    Log.d("TAGTest2B", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
+                    // TODO: I think this if statement should only happen once inside the while loop and it happens more than once
+                    pipeSetRemoved = true
                 }
             }
             // Add new pipes only after iteration is complete
+            Log.d("TAGTest2C", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
+            Log.d("TAGTest3", "onDraw: called: $testCounter pipeSets = ${pipes.size/2}")
             pipes.addAll(newPipes)
-            newPipes.clear()
+//            newPipes.clear()
+            Log.d("TAGTest4", "onDraw: called: $testCounter pipeSets = ${pipes.size/2} \n.")
         } else {
             // Draw pipes stopped
             while (iterator.hasNext()) {
