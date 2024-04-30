@@ -16,24 +16,26 @@ import kotlin.math.log
 //      - and fixing it is resource intensive
 
 class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayoutListener {
+    // GameState
     private var gameOn = false
     private var canAddPipe = false
-
+    // Test
     private var testCounter = 0 // debug
+    private var pipes = mutableListOf<Pipe>()
+    // Bird moves var
     private var birdStartY: Float = 0f
-
     private var birdY: Float = 0f
     private var birdStartVelocity: Float = 5f
     private var birdVelocity: Float = birdStartVelocity
-
-    private var pipes = mutableListOf<Pipe>()
-
+    // Bird moves const
     private val jumpVelocity: Float = 15f  // Downward velocity on jump
     private val gravity: Float = -0.5f  // Upward acceleration due to gravity
     private val pipeSpeed: Float = 6f
+    // Constants
     private val pipeYGap = 500 // minus minPipeY
     private val minPipeY: Int = 100
     private val gapXPipe: Float = 500f
+    // Drawing Constants
     private val pipeWidth: Float = 150f
     private val birdRadius: Float = 20f
     private val birdPaint: Paint = Paint().apply { color = Color.RED }
