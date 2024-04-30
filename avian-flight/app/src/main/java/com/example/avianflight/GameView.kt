@@ -18,22 +18,24 @@ import java.util.*
 class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayoutListener {
     private var gameOn = false
     private var canAddPipe = false
+
     private var testCounter = 0 // debug
     private var birdStartY: Float = 0f
     private var birdY: Float = 0f
     private var birdStartVelocity: Float = 5f
     private var birdVelocity: Float = birdStartVelocity
-    private val birdPaint: Paint = Paint().apply { color = Color.RED }
-    private val pipePaint: Paint = Paint().apply { color = Color.GREEN }
-    private val gravity: Float = -0.5f  // Upward acceleration due to gravity
-    private val jumpVelocity: Float = 15f  // Downward velocity on jump
-    private val birdRadius: Float = 20f  // Radius of the bird
 
     private var pipes = mutableListOf<Pipe>()
+
+    private val jumpVelocity: Float = 15f  // Downward velocity on jump
+    private val gravity: Float = -0.5f  // Upward acceleration due to gravity
+    private val pipeSpeed: Float = 6f
     private val pipeWidth: Float = 150f
     private val pipeYGap: Float = 100f
-    private val pipeSpeed: Float = 4f
     private val gapXPipe: Float = 500f
+    private val birdRadius: Float = 20f
+    private val birdPaint: Paint = Paint().apply { color = Color.RED }
+    private val pipePaint: Paint = Paint().apply { color = Color.GREEN }
 
     init {
         viewTreeObserver.addOnGlobalLayoutListener(this)
