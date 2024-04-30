@@ -1,6 +1,5 @@
 package com.example.avianflight
 
-// change add bar at bottom
 // change icon
 // fix pipe collision
 //
