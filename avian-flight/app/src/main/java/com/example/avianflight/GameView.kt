@@ -46,23 +46,14 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
         initializePipes()
     }
 
-    private fun initializePipes() {
-        // TODO: just change the position values of the pipes, rework this
-        for (i in 1..3) {
-            val initialXGap = i * gapXPipe + 650
-            pipes.add(Pipe(initialXGap, 0f, randomGapTop()))
-            pipes.add(Pipe(initialXGap, randomGapBottom(), height.toFloat()))
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        if (!gameOn) {
+            gameOn = true
+            postInvalidateOnAnimation()
+            restartGame()
         }
-    }
-
-    private fun randomGapTop(): Float {
-        val bound = (height - pipeYGap).coerceAtLeast(1f).toInt()
-        return Random().nextInt(bound).toFloat()
-    }
-
-    private fun randomGapBottom(): Float {
-        val top = randomGapTop()
-        return top + pipeYGap
+        if (event?.action == MotionEvent.ACTION_DOWN) birdVelocity = -jumpVelocity
+        return true
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -124,6 +115,25 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
         if (gameOn) postInvalidateOnAnimation()
     }
 
+    private fun initializePipes() {
+        // TODO: just change the position values of the pipes, rework this
+        for (i in 1..3) {
+            val initialXGap = i * gapXPipe + 650
+            pipes.add(Pipe(initialXGap, 0f, randomGapTop()))
+            pipes.add(Pipe(initialXGap, randomGapBottom(), height.toFloat()))
+        }
+    }
+
+    private fun randomGapTop(): Float {
+        val bound = (height - pipeYGap).coerceAtLeast(1f).toInt()
+        return Random().nextInt(bound).toFloat()
+    }
+
+    private fun randomGapBottom(): Float {
+        val top = randomGapTop()
+        return top + pipeYGap
+    }
+
     private fun collisionDetected(): Boolean {
         // Pipe collision
         // TODO: fix pipe collision
@@ -143,16 +153,6 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
         birdVelocity = birdStartVelocity
         birdY = birdStartY
         initializePipes()
-    }
-
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        if (!gameOn) {
-            gameOn = true
-            postInvalidateOnAnimation()
-            restartGame()
-        }
-        if (event?.action == MotionEvent.ACTION_DOWN) birdVelocity = -jumpVelocity
-        return true
     }
 
     data class Pipe(var x: Float, var top: Float, var bottom: Float)
