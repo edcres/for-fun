@@ -1,7 +1,9 @@
 package com.example.avianflight
 
-// fix pipe collision
 // fix YGap
+// fix pipe collision
+// change colors
+// like moving out the data class
 //
 // 6 -> 8 -> 10 -> 12 -> 16 -> 20 -> 24 -> 32 -> 40 -> 48
 // every 3:  x-1+2 ; x-2+4 ; x-4+8 ; x-8+16
@@ -19,7 +21,7 @@ package com.example.avianflight
 //
 // make the gravity feel better
 // when game  is over , have a way to restart it
-//make the code look better (cleaner) (like moving out the data class)
+//make the code look better (cleaner)
 
 
 class Scratch {

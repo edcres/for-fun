@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewTreeObserver
-import java.util.*
 
 // todo: instead of adding and removing items from a list, just have one list with 4 pipe sets
 //          - and just change the position for each pipe in the list
@@ -21,6 +20,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
 
     private var testCounter = 0 // debug
     private var birdStartY: Float = 0f
+
     private var birdY: Float = 0f
     private var birdStartVelocity: Float = 5f
     private var birdVelocity: Float = birdStartVelocity
@@ -30,9 +30,10 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     private val jumpVelocity: Float = 15f  // Downward velocity on jump
     private val gravity: Float = -0.5f  // Upward acceleration due to gravity
     private val pipeSpeed: Float = 6f
-    private val pipeWidth: Float = 150f
-    private val pipeYGap: Float = 100f
+    private val pipeYGap = 250 // minus minPipeY
+    private val minPipeY: Float = 100f
     private val gapXPipe: Float = 500f
+    private val pipeWidth: Float = 150f
     private val birdRadius: Float = 20f
     private val birdPaint: Paint = Paint().apply { color = Color.RED }
     private val pipePaint: Paint = Paint().apply { color = Color.GREEN }
@@ -88,8 +89,9 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
                     Log.d("TAGTest5", "onDraw: removed, left pipe at ${pipes[0].x + pipeWidth}, pipeSets = ${pipes.size/2}")
 //                    Log.d("TAGTest2A", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
                     val xGap = 2 * gapXPipe + 2 * pipeWidth
-                    newPipes.add(Pipe(xGap, 0f, randomGapTop()))
-                    newPipes.add(Pipe(xGap, randomGapBottom(), height.toFloat()))
+                    val randomGapTop = getRandomGapTop()
+                    newPipes.add(Pipe(xGap, 0f, randomGapTop))
+                    newPipes.add(Pipe(xGap, randomGapTop, height.toFloat()))
                     Log.d("TAGTest6", "onDraw: pipeAdded")
 //                    Log.d("TAGTest2B", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
                     // TODO: I think this if statement should only happen once inside the while loop and it happens more than once
@@ -121,19 +123,26 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
         // TODO: just change the position values of the pipes, rework this
         for (i in 1..3) {
             val initialXGap = i * gapXPipe + 650
-            pipes.add(Pipe(initialXGap, 0f, randomGapTop()))
-            pipes.add(Pipe(initialXGap, randomGapBottom(), height.toFloat()))
+            val randomGapTop = getRandomGapTop()
+            pipes.add(Pipe(initialXGap, 0f, randomGapTop))
+            pipes.add(Pipe(initialXGap, getRandomGapBottom(randomGapTop) + minPipeY, height.toFloat()))
         }
     }
 
-    private fun randomGapTop(): Float {
-        val bound = (height - pipeYGap).coerceAtLeast(1f).toInt()
-        return Random().nextInt(bound).toFloat()
+    private fun getRandomGapTop(): Float {
+//        val bound = (height - pipeYGap).coerceAtLeast(1f).toInt()
+//        return Random().nextInt(bound).toFloat()
+        val minYGapTop = (height/1.5).toInt()
+
+        Log.d("TAG0", "randomGapTop: screenY = ${height}; minYGapTop = $minYGapTop")
+//        val minPipeYTop = height/1.5.toInt()
+        val yGapTop = (0..minYGapTop).random().toFloat()
+        Log.d("TAG0", "randomGapTop: yGapTop = ${yGapTop}")
+        return yGapTop
     }
 
-    private fun randomGapBottom(): Float {
-        val top = randomGapTop()
-        return top + pipeYGap
+    private fun getRandomGapBottom(randomGapTop: Float): Float {
+        return randomGapTop + pipeYGap
     }
 
     private fun collisionDetected(): Boolean {
