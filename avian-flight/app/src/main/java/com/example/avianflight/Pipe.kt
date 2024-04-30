@@ -1,3 +1,7 @@
 package com.example.avianflight
 
-data class Pipe(var x: Float, var top: Float, var bottom: Float)
+data class Pipe(
+    var xGap: Float,
+    var top: Float,
+    var bottom: Float
+)

@@ -77,16 +77,16 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
             // Draw Pipes
             while (iterator.hasNext()) {
                 val pipe = iterator.next()
-                pipe.x -= pipeSpeed
-                canvas?.drawRect(pipe.x, pipe.top, pipe.x + pipeWidth, pipe.bottom, pipePaint)
+                pipe.xGap -= pipeSpeed
+                canvas?.drawRect(pipe.xGap, pipe.top, pipe.xGap + pipeWidth, pipe.bottom, pipePaint)
                 // If pipe left the screen, add new pipe
-                Log.d("TAGTest3", "onDraw: to remove, pipe passed ${pipe.x + pipeWidth < 0}, pipes = ${pipes.size}")
-                if (pipe.x + pipeWidth < 0 && !pipeSetRemoved) {
+                Log.d("TAGTest3", "onDraw: to remove, pipe passed ${pipe.xGap + pipeWidth < 0}, pipes = ${pipes.size}")
+                if (pipe.xGap + pipeWidth < 0 && !pipeSetRemoved) {
                     canAddPipe = !canAddPipe
 //                    Log.d("TAGTest1B", "onDraw: pipeX = ${pipe.x}; pipeXEnd = ${pipe.x + pipeWidth}")
-                    Log.d("TAGTest4", "onDraw: to remove, pipe at ${pipes[0].x + pipeWidth}?, pipeSets = ${pipes.size/2}")
+                    Log.d("TAGTest4", "onDraw: to remove, pipe at ${pipes[0].xGap + pipeWidth}?, pipeSets = ${pipes.size/2}")
                     iterator.remove()
-                    Log.d("TAGTest5", "onDraw: removed, left pipe at ${pipes[0].x + pipeWidth}, pipeSets = ${pipes.size/2}")
+                    Log.d("TAGTest5", "onDraw: removed, left pipe at ${pipes[0].xGap + pipeWidth}, pipeSets = ${pipes.size/2}")
 //                    Log.d("TAGTest2A", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
                     val xGap = 2 * gapXPipe + 2 * pipeWidth
                     val randomGapTop = getRandomGapTop()
@@ -108,7 +108,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
             // Draw pipes stopped
             while (iterator.hasNext()) {
                 val pipe = iterator.next()
-                canvas?.drawRect(pipe.x, pipe.top, pipe.x + pipeWidth, pipe.bottom, pipePaint)
+                canvas?.drawRect(pipe.xGap, pipe.top, pipe.xGap + pipeWidth, pipe.bottom, pipePaint)
             }
         }
 
@@ -149,7 +149,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
         // Pipe collision
         // TODO: fix pipe collision
         for (pipe in pipes) {
-            if (pipe.x < 100f + birdRadius && pipe.x + pipeWidth > 100f - birdRadius) {
+            if (pipe.xGap < 100f + birdRadius && pipe.xGap + pipeWidth > 100f - birdRadius) {
                 if (birdY - birdRadius < pipe.bottom || birdY + birdRadius > pipe.top) {
                     return true  // Collision detected
                 }
