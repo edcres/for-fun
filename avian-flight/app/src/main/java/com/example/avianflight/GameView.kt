@@ -38,10 +38,11 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     // Drawing Constants
     private val pipeWidth: Float = 150f
     private val birdRadius: Float = 20f
-    private val birdPaint: Paint = Paint().apply { color = Color.RED }
-    private val pipePaint: Paint = Paint().apply { color = Color.GREEN }
+    private val birdPaint: Paint = Paint().apply { color = Color.CYAN }
+    private val pipePaint: Paint = Paint().apply { color = Color.RED }
 
     init {
+        setBackgroundColor(Color.parseColor("#be1010"))
         viewTreeObserver.addOnGlobalLayoutListener(this)
     }
 

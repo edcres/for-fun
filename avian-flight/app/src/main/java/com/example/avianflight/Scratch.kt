@@ -1,9 +1,7 @@
 package com.example.avianflight
 
-// fix YGap
-// fix pipe collision
 // change colors
-// like moving out the data class
+// fix pipe collision
 //
 // 6 -> 8 -> 10 -> 12 -> 16 -> 20 -> 24 -> 32 -> 40 -> 48
 // every 3:  x-1+2 ; x-2+4 ; x-4+8 ; x-8+16
