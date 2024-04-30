@@ -165,6 +165,4 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
         birdY = birdStartY
         initializePipes()
     }
-
-    data class Pipe(var x: Float, var top: Float, var bottom: Float)
 }
