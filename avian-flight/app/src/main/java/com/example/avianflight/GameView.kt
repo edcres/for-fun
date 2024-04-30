@@ -24,7 +24,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     private val birdPaint: Paint = Paint().apply { color = Color.RED }
     private val pipePaint: Paint = Paint().apply { color = Color.GREEN }
     private val gravity: Float = -0.5f  // Upward acceleration due to gravity
-    private val jumpVelocity: Float = 10f  // Downward velocity on jump
+    private val jumpVelocity: Float = 15f  // Downward velocity on jump
     private val birdRadius: Float = 20f  // Radius of the bird
 
     private var pipes = mutableListOf<Pipe>()
