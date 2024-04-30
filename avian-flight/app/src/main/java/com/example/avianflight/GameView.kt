@@ -162,8 +162,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
             }
         }
         // Ceiling or Floor Collision
-        if (birdY < (0 + birdRadius) || birdY > (height - birdRadius)) return true
-        return false
+        return birdY < (0 + birdRadius-5) || birdY > (height - bottomEdgeHeight - birdRadius)
     }
 
     private fun restartGame() {
