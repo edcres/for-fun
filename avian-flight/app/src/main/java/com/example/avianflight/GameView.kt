@@ -112,15 +112,15 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
             }
         }
 
-//        if (collisionDetected()) {
-//            // Handle collision, e.g., end game or reset
-//            birdY = height / 2f
-//            birdVelocity = 5f
-//            gameOn = false
-//        }
+        if (collisionDetected()) {
+            // Handle collision, e.g., end game or reset
+            birdY = height / 2f
+            birdVelocity = 5f
+            gameOn = false
+        }
 
         // Triggers onDraw
-        postInvalidateOnAnimation()
+        if (gameOn) postInvalidateOnAnimation()
     }
 
     private fun collisionDetected(): Boolean {
@@ -139,7 +139,10 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        if (!gameOn) gameOn = true
+        if (!gameOn) {
+            gameOn = true
+            postInvalidateOnAnimation()
+        }
         if (event?.action == MotionEvent.ACTION_DOWN) birdVelocity = -jumpVelocity
         return true
     }
