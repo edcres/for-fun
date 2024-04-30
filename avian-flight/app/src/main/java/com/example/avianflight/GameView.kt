@@ -41,11 +41,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     private val birdRadius: Float = 20f
     private val birdPaint: Paint = Paint().apply { color = Color.CYAN }
     private val pipePaint: Paint = Paint().apply { color = Color.RED }
-    private val bottomEdgePaint = Paint().apply {
-        color = Color.parseColor("#910303")
-        style = Paint.Style.FILL
-        isAntiAlias = true
-    }
+    private val bottomEdgePaint = Paint().apply { color = Color.parseColor("#910303") }
 
     init {
         setBackgroundColor(Color.parseColor("#be1010"))
