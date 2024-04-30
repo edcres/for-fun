@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewTreeObserver
+import kotlin.math.log
 
 // todo: instead of adding and removing items from a list, just have one list with 4 pipe sets
 //          - and just change the position for each pipe in the list
@@ -30,8 +31,8 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     private val jumpVelocity: Float = 15f  // Downward velocity on jump
     private val gravity: Float = -0.5f  // Upward acceleration due to gravity
     private val pipeSpeed: Float = 6f
-    private val pipeYGap = 250 // minus minPipeY
-    private val minPipeY: Float = 100f
+    private val pipeYGap = 500 // minus minPipeY
+    private val minPipeY: Int = 100
     private val gapXPipe: Float = 500f
     private val pipeWidth: Float = 150f
     private val birdRadius: Float = 20f
@@ -123,26 +124,19 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
         // TODO: just change the position values of the pipes, rework this
         for (i in 1..3) {
             val initialXGap = i * gapXPipe + 650
-            val randomGapTop = getRandomGapTop()
-            pipes.add(Pipe(initialXGap, 0f, randomGapTop))
-            pipes.add(Pipe(initialXGap, getRandomGapBottom(randomGapTop) + minPipeY, height.toFloat()))
+            val randomYGapTop = getRandomGapTop()
+            pipes.add(Pipe(initialXGap, 0f, randomYGapTop))
+            pipes.add(Pipe(initialXGap, getRandomGapBottom(randomYGapTop), height.toFloat()))
         }
     }
 
     private fun getRandomGapTop(): Float {
-//        val bound = (height - pipeYGap).coerceAtLeast(1f).toInt()
-//        return Random().nextInt(bound).toFloat()
-        val minYGapTop = (height/1.5).toInt()
-
-        Log.d("TAG0", "randomGapTop: screenY = ${height}; minYGapTop = $minYGapTop")
-//        val minPipeYTop = height/1.5.toInt()
-        val yGapTop = (0..minYGapTop).random().toFloat()
-        Log.d("TAG0", "randomGapTop: yGapTop = ${yGapTop}")
-        return yGapTop
+        val maxYGapTop = (height/1.5f).toInt()
+        return (minPipeY..maxYGapTop).random().toFloat()
     }
 
     private fun getRandomGapBottom(randomGapTop: Float): Float {
-        return randomGapTop + pipeYGap
+        return randomGapTop + pipeYGap - minPipeY
     }
 
     private fun collisionDetected(): Boolean {
@@ -163,6 +157,5 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     private fun restartGame() {
         birdVelocity = birdStartVelocity
         birdY = birdStartY
-        initializePipes()
     }
 }
