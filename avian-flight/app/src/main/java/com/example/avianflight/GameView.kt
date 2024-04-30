@@ -10,8 +10,14 @@ import android.view.View
 import android.view.ViewTreeObserver
 import java.util.*
 
+// todo: instead of adding and removing items from a list, just have one list with 4 pipe sets
+//          - and just change the position for each pipe in the list
+// The way is is now it creates a ConcurrentModificationException
+//      - and fixing it is resource intensive
+
 class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayoutListener {
     private var gameOn = false
+    private var canAddPipe = false
     private var testCounter = 0 // debug
     private var birdY: Float = 700f
     private var birdVelocity: Float = 5f
@@ -75,24 +81,29 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
                 pipe.x -= pipeSpeed
                 canvas?.drawRect(pipe.x, pipe.top, pipe.x + pipeWidth, pipe.bottom, pipePaint)
                 // If pipe left the screen, add new pipe
+                Log.d("TAGTest3", "onDraw: to remove, pipe passed ${pipe.x + pipeWidth < 0}, pipes = ${pipes.size}")
                 if (pipe.x + pipeWidth < 0 && !pipeSetRemoved) {
-                    Log.d("TAGTest1B", "onDraw: pipeX = ${pipe.x}; pipeXEnd = ${pipe.x + pipeWidth}")
+                    canAddPipe = !canAddPipe
+//                    Log.d("TAGTest1B", "onDraw: pipeX = ${pipe.x}; pipeXEnd = ${pipe.x + pipeWidth}")
+                    Log.d("TAGTest4", "onDraw: to remove, pipe at ${pipes[0].x + pipeWidth}?, pipeSets = ${pipes.size/2}")
                     iterator.remove()
+                    Log.d("TAGTest5", "onDraw: removed, left pipe at ${pipes[0].x + pipeWidth}, pipeSets = ${pipes.size/2}")
+//                    Log.d("TAGTest2A", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
                     val xGap = 2 * gapXPipe + 2 * pipeWidth
-                    Log.d("TAGTest2A", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
                     newPipes.add(Pipe(xGap, 0f, randomGapTop()))
                     newPipes.add(Pipe(xGap, randomGapBottom(), height.toFloat()))
-                    Log.d("TAGTest2B", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
+                    Log.d("TAGTest6", "onDraw: pipeAdded")
+//                    Log.d("TAGTest2B", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
                     // TODO: I think this if statement should only happen once inside the while loop and it happens more than once
                     pipeSetRemoved = true
                 }
             }
             // Add new pipes only after iteration is complete
-            Log.d("TAGTest2C", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
-            Log.d("TAGTest3", "onDraw: called: $testCounter pipeSets = ${pipes.size/2}")
+//            Log.d("TAGTest2C", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
+//            Log.d("TAGTest3", "onDraw: called: $testCounter pipeSets = ${pipes.size/2}")
             pipes.addAll(newPipes)
 //            newPipes.clear()
-            Log.d("TAGTest4", "onDraw: called: $testCounter pipeSets = ${pipes.size/2} \n.")
+            Log.d("TAGTest4", "onDraw: called: $testCounter, newPipeSets = ${newPipes.size/2}, pipeSets = ${pipes.size/2} \n.")
         } else {
             // Draw pipes stopped
             while (iterator.hasNext()) {

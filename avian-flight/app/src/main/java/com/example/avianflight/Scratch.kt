@@ -4,6 +4,7 @@ package com.example.avianflight
 // every 3:  x-1+2 ; x-2+4 ; x-4+8 ; x-8+16
 // 3033; 3123; 3134; 4044
 // 011, 011
+// -4; -8
 // it goes from 7 to 8 very fast
 // remove first pipe set when gone
 // a shitton of pipes are added when
