@@ -36,10 +36,12 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     private val minPipeY: Int = 100
     private val gapXPipe: Float = 500f
     // Drawing Constants
+    private val bottomEdgeHeight: Float = 200f
     private val pipeWidth: Float = 150f
     private val birdRadius: Float = 20f
     private val birdPaint: Paint = Paint().apply { color = Color.CYAN }
     private val pipePaint: Paint = Paint().apply { color = Color.RED }
+    private val bottomEdgePaint = Paint().apply { color = Color.parseColor("#be1010")}
 
     init {
         setBackgroundColor(Color.parseColor("#be1010"))
@@ -66,6 +68,12 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 //        Log.d("TAGTest1", "onDrawDraw: called $testCounter")
+        // Draw bottom edge
+        canvas?.drawRect(
+            0f, height.toFloat() - bottomEdgeHeight,
+            width.toFloat(), height.toFloat(), pipePaint
+        )
+
         testCounter++
         val newPipes = mutableListOf<Pipe>()
         Log.d("TAGTest1", "onDraw: called: $testCounter pipeSets = ${pipes.size/2}")
