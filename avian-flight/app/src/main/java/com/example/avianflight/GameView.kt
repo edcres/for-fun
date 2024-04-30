@@ -50,7 +50,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
 
     override fun onGlobalLayout() {
         viewTreeObserver.removeOnGlobalLayoutListener(this)
-        birdStartY = height/2f
+        birdStartY = (height-bottomEdgeHeight)/2f
         birdY = birdStartY
         initializePipes()
     }
@@ -98,7 +98,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
                     val xGap = 2 * gapXPipe + 2 * pipeWidth
                     val randomGapTop = getRandomGapTop()
                     newPipes.add(Pipe(xGap, 0f, randomGapTop))
-                    newPipes.add(Pipe(xGap, randomGapTop, height.toFloat()))
+                    newPipes.add(Pipe(xGap, randomGapTop, height.toFloat() - bottomEdgeHeight))
                     Log.d("TAGTest6", "onDraw: pipeAdded")
 //                    Log.d("TAGTest2B", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
                     // TODO: I think this if statement should only happen once inside the while loop and it happens more than once
@@ -137,13 +137,14 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
         for (i in 1..3) {
             val initialXGap = i * gapXPipe + 650
             val randomYGapTop = getRandomGapTop()
+            val pipeBottom = height.toFloat() - bottomEdgeHeight
             pipes.add(Pipe(initialXGap, 0f, randomYGapTop))
-            pipes.add(Pipe(initialXGap, getRandomGapBottom(randomYGapTop), height.toFloat()))
+            pipes.add(Pipe(initialXGap, getRandomGapBottom(randomYGapTop), pipeBottom))
         }
     }
 
     private fun getRandomGapTop(): Float {
-        val maxYGapTop = (height/1.5f).toInt()
+        val maxYGapTop = ((height-bottomEdgeHeight)/1.5f).toInt()
         return (minPipeY..maxYGapTop).random().toFloat()
     }
 
