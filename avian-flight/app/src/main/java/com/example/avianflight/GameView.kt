@@ -19,8 +19,10 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     private var gameOn = false
     private var canAddPipe = false
     private var testCounter = 0 // debug
-    private var birdY: Float = 700f
-    private var birdVelocity: Float = 5f
+    private var birdStartY: Float = 0f
+    private var birdY: Float = 0f
+    private var birdStartVelocity: Float = 5f
+    private var birdVelocity: Float = birdStartVelocity
     private val birdPaint: Paint = Paint().apply { color = Color.RED }
     private val pipePaint: Paint = Paint().apply { color = Color.GREEN }
     private val gravity: Float = -0.5f  // Upward acceleration due to gravity
@@ -39,10 +41,13 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
 
     override fun onGlobalLayout() {
         viewTreeObserver.removeOnGlobalLayoutListener(this)
+        birdStartY = height/2f
+        birdY = birdStartY
         initializePipes()
     }
 
     private fun initializePipes() {
+        // TODO: just change the position values of the pipes, rework this
         for (i in 1..3) {
             val initialXGap = i * gapXPipe + 650
             pipes.add(Pipe(initialXGap, 0f, randomGapTop()))
@@ -112,12 +117,8 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
             }
         }
 
-        if (collisionDetected()) {
-            // Handle collision, e.g., end game or reset
-            birdY = height / 2f
-            birdVelocity = 5f
-            gameOn = false
-        }
+        // Handle collision, e.g., end game or reset
+        if (collisionDetected()) gameOn = false
 
         // Triggers onDraw
         if (gameOn) postInvalidateOnAnimation()
@@ -138,10 +139,17 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
         return false
     }
 
+    private fun restartGame() {
+        birdVelocity = birdStartVelocity
+        birdY = birdStartY
+        initializePipes()
+    }
+
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if (!gameOn) {
             gameOn = true
             postInvalidateOnAnimation()
+            restartGame()
         }
         if (event?.action == MotionEvent.ACTION_DOWN) birdVelocity = -jumpVelocity
         return true
