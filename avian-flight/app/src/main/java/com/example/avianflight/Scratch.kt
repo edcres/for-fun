@@ -1,6 +1,5 @@
 package com.example.avianflight
 
-// change icon
 // fix pipe collision
 //
 // 6 -> 8 -> 10 -> 12 -> 16 -> 20 -> 24 -> 32 -> 40 -> 48

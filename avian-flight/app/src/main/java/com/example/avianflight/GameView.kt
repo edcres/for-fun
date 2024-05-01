@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewTreeObserver
-import kotlin.math.log
 
 // todo: instead of adding and removing items from a list, just have one list with 4 pipe sets
 //          - and just change the position for each pipe in the list
@@ -39,6 +38,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     private val bottomEdgeHeight: Float = 200f
     private val pipeWidth: Float = 150f
     private val birdRadius: Float = 20f
+    private val birdX: Float = 100f
     private val birdPaint: Paint = Paint().apply { color = Color.CYAN }
     private val pipePaint: Paint = Paint().apply { color = Color.RED }
     private val bottomEdgePaint = Paint().apply { color = Color.parseColor("#910303") }
@@ -74,7 +74,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
         Log.d("TAGTest1", "onDraw: called: $testCounter pipeSets = ${pipes.size/2}")
         val iterator = pipes.iterator()
         // draw bird
-        canvas?.drawCircle(100f, birdY, birdRadius, birdPaint)
+        canvas?.drawCircle(birdX, birdY, birdRadius, birdPaint)
         if (gameOn) {
             var pipeSetRemoved = false
             // Move Bird
@@ -87,19 +87,19 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
                 pipe.xGap -= pipeSpeed
                 canvas?.drawRect(pipe.xGap, pipe.top, pipe.xGap + pipeWidth, pipe.bottom, pipePaint)
                 // If pipe left the screen, add new pipe
-                Log.d("TAGTest3", "onDraw: to remove, pipe passed ${pipe.xGap + pipeWidth < 0}, pipes = ${pipes.size}")
+//                Log.d("TAGTest3", "onDraw: to remove, pipe passed ${pipe.xGap + pipeWidth < 0}, pipes = ${pipes.size}")
                 if (pipe.xGap + pipeWidth < 0 && !pipeSetRemoved) {
                     canAddPipe = !canAddPipe
 //                    Log.d("TAGTest1B", "onDraw: pipeX = ${pipe.x}; pipeXEnd = ${pipe.x + pipeWidth}")
-                    Log.d("TAGTest4", "onDraw: to remove, pipe at ${pipes[0].xGap + pipeWidth}?, pipeSets = ${pipes.size/2}")
+//                    Log.d("TAGTest4", "onDraw: to remove, pipe at ${pipes[0].xGap + pipeWidth}?, pipeSets = ${pipes.size/2}")
                     iterator.remove()
-                    Log.d("TAGTest5", "onDraw: removed, left pipe at ${pipes[0].xGap + pipeWidth}, pipeSets = ${pipes.size/2}")
+//                    Log.d("TAGTest5", "onDraw: removed, left pipe at ${pipes[0].xGap + pipeWidth}, pipeSets = ${pipes.size/2}")
 //                    Log.d("TAGTest2A", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
                     val xGap = 2 * gapXPipe + 2 * pipeWidth
                     val randomGapTop = getRandomGapTop()
                     newPipes.add(Pipe(xGap, 0f, randomGapTop))
                     newPipes.add(Pipe(xGap, randomGapTop, height.toFloat() - bottomEdgeHeight))
-                    Log.d("TAGTest6", "onDraw: pipeAdded")
+//                    Log.d("TAGTest6", "onDraw: pipeAdded")
 //                    Log.d("TAGTest2B", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
                     // TODO: I think this if statement should only happen once inside the while loop and it happens more than once
                     pipeSetRemoved = true
@@ -110,7 +110,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
 //            Log.d("TAGTest3", "onDraw: called: $testCounter pipeSets = ${pipes.size/2}")
             pipes.addAll(newPipes)
 //            newPipes.clear()
-            Log.d("TAGTest4", "onDraw: called: $testCounter, newPipeSets = ${newPipes.size/2}, pipeSets = ${pipes.size/2} \n.")
+//            Log.d("TAGTest4", "onDraw: called: $testCounter, newPipeSets = ${newPipes.size/2}, pipeSets = ${pipes.size/2} \n.")
         } else {
             // Draw pipes stopped
             while (iterator.hasNext()) {
@@ -126,7 +126,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
         )
 
         // Handle collision, e.g., end game or reset
-        if (collisionDetected()) gameOn = false
+        if (birdCollisionDetected()) gameOn = false
 
         // Triggers onDraw
         if (gameOn) postInvalidateOnAnimation()
@@ -152,13 +152,24 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
         return randomGapTop + pipeYGap - minPipeY
     }
 
-    private fun collisionDetected(): Boolean {
-        // Pipe collision
-        // TODO: fix pipe collision
-        for (pipe in pipes) {
-            if (pipe.xGap < 100f + birdRadius && pipe.xGap + pipeWidth > 100f - birdRadius) {
-                if (birdY - birdRadius < pipe.bottom || birdY + birdRadius > pipe.top) {
-                    return true  // Collision detected
+    private fun birdCollisionDetected(): Boolean {
+        // Check only first 2 pipes (top and bottom)
+        var pipePos = 0
+        // Only loop through top pipes
+        for (i in 2 until pipes.size)
+            if (i % 2 == 0 && pipes[pipePos].xGap > pipes[i].xGap) pipePos = i
+        for (i in pipePos..(pipePos + 1)) {
+            // X axis
+            if (pipes[i].xGap < birdX + birdRadius
+                &&
+                pipes[i].xGap + pipeWidth > birdX - birdRadius
+            ) {
+                if (i == pipePos && birdY - birdRadius < pipes[i].bottom) {
+                    // Top Pipe
+                    return true
+                } else if (i == pipePos + 1 && birdY + birdRadius > pipes[i].top) {
+                    // Bottom Pipe
+                    return true
                 }
             }
         }
