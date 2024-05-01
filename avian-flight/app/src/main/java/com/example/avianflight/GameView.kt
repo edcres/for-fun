@@ -18,9 +18,9 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     // GameState
     private var gameOn = false
     private var canAddPipe = false
+    private var pipes = mutableListOf<Pipe>()
     // Test
     private var testCounter = 0 // debug
-    private var pipes = mutableListOf<Pipe>()
     // Bird moves var
     private var birdStartY: Float = 0f
     private var birdY: Float = 0f
@@ -61,6 +61,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
             postInvalidateOnAnimation()
             restartGame()
         }
+        // Jump
         if (event?.action == MotionEvent.ACTION_DOWN) birdVelocity = -jumpVelocity
         return true
     }
