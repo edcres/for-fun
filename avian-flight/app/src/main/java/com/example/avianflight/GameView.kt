@@ -33,7 +33,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     // Constants
     private val pipeYGap = 500 // minus minPipeY
     private val minPipeY: Int = 100
-    private val gapXPipe: Float = 500f
+    private val pipeGapX: Float = 500f
     // Drawing Constants
     private val bottomEdgeHeight: Float = 200f
     private val pipeWidth: Float = 150f
@@ -95,7 +95,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
                     iterator.remove()
 //                    Log.d("TAGTest5", "onDraw: removed, left pipe at ${pipes[0].xGap + pipeWidth}, pipeSets = ${pipes.size/2}")
 //                    Log.d("TAGTest2A", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
-                    val xGap = 2 * gapXPipe + 2 * pipeWidth
+                    val xGap = 2 * pipeGapX + 2 * pipeWidth
                     val randomGapTop = getRandomGapTop()
                     newPipes.add(Pipe(xGap, 0f, randomGapTop))
                     newPipes.add(Pipe(xGap, randomGapTop, height.toFloat() - bottomEdgeHeight))
@@ -135,7 +135,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     private fun initializePipes() {
         // TODO: just change the position values of the pipes, rework this
         for (i in 1..3) {
-            val initialXGap = i * gapXPipe + 650
+            val initialXGap = i * pipeGapX + 650
             val randomYGapTop = getRandomGapTop()
             val pipeBottom = height.toFloat() - bottomEdgeHeight
             pipes.add(Pipe(initialXGap, 0f, randomYGapTop))

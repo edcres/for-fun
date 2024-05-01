@@ -1,7 +1,5 @@
 package com.example.avianflight
 
-// fix pipe collision
-//
 // 6 -> 8 -> 10 -> 12 -> 16 -> 20 -> 24 -> 32 -> 40 -> 48
 // every 3:  x-1+2 ; x-2+4 ; x-4+8 ; x-8+16
 // 3033; 3123; 3134; 4044
@@ -14,7 +12,7 @@ package com.example.avianflight
 //      - one is removed, i only want to add one
 // add pipes correctly
 // gets very laggy after like 6 pipes
-//  - (probably because theres a shitton of pipies after some time)
+//  - (probably because theres a shitton of pipes after some time)
 //
 // make the gravity feel better
 // when game  is over , have a way to restart it
