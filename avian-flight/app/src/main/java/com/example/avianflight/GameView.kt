@@ -148,9 +148,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
         return (minPipeY..maxYGapTop).random().toFloat()
     }
 
-    private fun getRandomGapBottom(randomGapTop: Float): Float {
-        return randomGapTop + pipeYGap - minPipeY
-    }
+    private fun getRandomGapBottom(randomGapTop: Float): Float = randomGapTop + pipeYGap - minPipeY
 
     private fun birdCollisionDetected(): Boolean {
         // Check only first 2 pipes (top and bottom)
@@ -164,13 +162,10 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
                 &&
                 pipes[i].xGap + pipeWidth > birdX - birdRadius
             ) {
-                if (i == pipePos && birdY - birdRadius < pipes[i].bottom) {
-                    // Top Pipe
-                    return true
-                } else if (i == pipePos + 1 && birdY + birdRadius > pipes[i].top) {
-                    // Bottom Pipe
-                    return true
-                }
+                // Top Pipe
+                if (i == pipePos && birdY - birdRadius < pipes[i].bottom) return true
+                // Bottom Pipe
+                else if (i == pipePos + 1 && birdY + birdRadius > pipes[i].top) return true
             }
         }
         // Ceiling or Floor Collision
