@@ -96,6 +96,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
                 if (pipe.xGap + pipeWidth < 0) {
                     val xGap = 2 * pipeGapX + 2 * pipeWidth
                     val randomGapTop = getRandomGapTop()
+                    val pipeBottom = height.toFloat() - bottomEdgeHeight
 
                     // TODO: Try using an iterator instead
                     if (previousTopPipe == null) {
@@ -112,7 +113,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
                     }
 
                     newPipes.add(Pipe(xGap, 0f, randomGapTop))
-                    newPipes.add(Pipe(xGap, randomGapTop, height.toFloat() - bottomEdgeHeight))
+                    newPipes.add(Pipe(xGap, getRandomGapBottom(randomGapTop), pipeBottom))
                 }
             }
 
@@ -142,7 +143,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
                     val xGap = 2 * pipeGapX + 2 * pipeWidth
                     val randomGapTop = getRandomGapTop()
                     newPipes.add(Pipe(xGap, 0f, randomGapTop))
-                    newPipes.add(Pipe(xGap, randomGapTop, height.toFloat() - bottomEdgeHeight))
+                    newPipes.add(Pipe(xGap, getRandomGapBottom(randomGapTop), height.toFloat() - bottomEdgeHeight))
 //                    Log.d("TAGTest6", "onDraw: pipeAdded")
 //                    Log.d("TAGTest2B", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
                     // TODO: I think this if statement should only happen once inside the while loop and it happens more than once
@@ -190,7 +191,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     }
 
     private fun initializePipes() {
-        // TODO: just change the position values of the pipes, rework this
+        // TODO: just change the position values of the pipes, rework this if necessary
         for (i in 1..3) {
             val initialXGap = i * pipeGapX + 650
             val randomYGapTop = getRandomGapTop()
