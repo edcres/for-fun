@@ -1,5 +1,7 @@
 package com.example.avianflight
 
+// maybe remove mutability from the mutable list of pipes
+
 // 6 -> 8 -> 10 -> 12 -> 16 -> 20 -> 24 -> 32 -> 40 -> 48
 // every 3:  x-1+2 ; x-2+4 ; x-4+8 ; x-8+16
 // 3033; 3123; 3134; 4044
@@ -17,10 +19,12 @@ package com.example.avianflight
 // make the gravity feel better
 // when game  is over , have a way to restart it
 //make the code look better (cleaner)
+//
+// explore other overriding functions from the canvas library like (onDraw())
 
 
 class Scratch {
-    
+
 }
 
 // before reworking pipes list

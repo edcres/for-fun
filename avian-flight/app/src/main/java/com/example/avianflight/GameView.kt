@@ -17,10 +17,10 @@ import android.view.ViewTreeObserver
 class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayoutListener {
     // GameState
     private var gameOn = false
-    private var canAddPipe = false
     private var pipes = mutableListOf<Pipe>()
     // Test
     private var testCounter = 0 // debug
+    private var canAddPipe = false
     // Bird moves var
     private var birdStartY: Float = 0f
     private var birdY: Float = 0f
@@ -77,10 +77,52 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
         // draw bird
         canvas?.drawCircle(birdX, birdY, birdRadius, birdPaint)
         if (gameOn) {
-            var pipeSetRemoved = false
+//            var pipeSetRemoved = false
             // Move Bird
             birdVelocity -= gravity
             birdY -= birdVelocity
+
+
+
+
+            var previousTopPipe: Pipe? = null
+            for (pipe in pipes) {
+                // Move pipe
+                pipe.xGap -= pipeSpeed
+                canvas?.drawRect(
+                    pipe.xGap, pipe.top, pipe.xGap + pipeWidth, pipe.bottom, pipePaint
+                )
+                // If pipe left the screen, move it to the end
+                if (pipe.xGap + pipeWidth < 0) {
+                    val xGap = 2 * pipeGapX + 2 * pipeWidth
+                    val randomGapTop = getRandomGapTop()
+
+                    // TODO: Try using an iterator instead
+                    if (previousTopPipe == null) {
+                        previousTopPipe = pipe
+                    } else {
+                        pipe.xGap = xGap
+                        // Top Pipe
+                        previousTopPipe.xGap = xGap
+                        previousTopPipe.bottom = randomGapTop
+                        previousTopPipe = null
+                        // Bottom Pipe
+                        pipe.xGap = xGap
+                        pipe.top = randomGapTop
+                    }
+
+                    newPipes.add(Pipe(xGap, 0f, randomGapTop))
+                    newPipes.add(Pipe(xGap, randomGapTop, height.toFloat() - bottomEdgeHeight))
+                }
+            }
+
+
+
+
+
+
+
+
 
             // Draw Pipes
             while (iterator.hasNext()) {
@@ -89,7 +131,8 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
                 canvas?.drawRect(pipe.xGap, pipe.top, pipe.xGap + pipeWidth, pipe.bottom, pipePaint)
                 // If pipe left the screen, add new pipe
 //                Log.d("TAGTest3", "onDraw: to remove, pipe passed ${pipe.xGap + pipeWidth < 0}, pipes = ${pipes.size}")
-                if (pipe.xGap + pipeWidth < 0 && !pipeSetRemoved) {
+//                if (pipe.xGap + pipeWidth < 0 && !pipeSetRemoved) {
+                if (pipe.xGap + pipeWidth < 0) {
                     canAddPipe = !canAddPipe
 //                    Log.d("TAGTest1B", "onDraw: pipeX = ${pipe.x}; pipeXEnd = ${pipe.x + pipeWidth}")
 //                    Log.d("TAGTest4", "onDraw: to remove, pipe at ${pipes[0].xGap + pipeWidth}?, pipeSets = ${pipes.size/2}")
@@ -103,7 +146,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
 //                    Log.d("TAGTest6", "onDraw: pipeAdded")
 //                    Log.d("TAGTest2B", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
                     // TODO: I think this if statement should only happen once inside the while loop and it happens more than once
-                    pipeSetRemoved = true
+//                    pipeSetRemoved = true
                 }
             }
             // Add new pipes only after iteration is complete
@@ -119,6 +162,19 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
                 canvas?.drawRect(pipe.xGap, pipe.top, pipe.xGap + pipeWidth, pipe.bottom, pipePaint)
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // Draw bottom edge
         canvas?.drawRect(
