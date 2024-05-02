@@ -35,7 +35,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     private val birdX: Float = 100f
     private val birdPaint: Paint = Paint().apply { color = Color.CYAN }
     private val pipePaint: Paint = Paint().apply { color = Color.RED }
-    private val bottomEdgePaint = Paint().apply { color = Color.parseColor("#910303") }
+    private val bottomEdgePaint = Paint().apply { color = Color.parseColor("#510000") }
     private val scorePaint = Paint().apply {
         color = Color.BLACK
         textSize = 150f
@@ -45,7 +45,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     }
 
     init {
-        setBackgroundColor(Color.parseColor("#be1010"))
+        setBackgroundColor(Color.parseColor("#7A0000"))
         viewTreeObserver.addOnGlobalLayoutListener(this)
     }
 

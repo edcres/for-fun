@@ -1,11 +1,5 @@
 package com.example.avianflight
 
-// make the gravity feel better
-// when game is over , have a way to restart it
-// make the code look better (cleaner)
-//
-// explore other overriding functions from the canvas library like (onDraw())
-
 class Scratch {
 
 }
