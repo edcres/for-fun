@@ -22,8 +22,8 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     private var birdStartVelocity: Float = 5f
     private var birdVelocity: Float = birdStartVelocity
     // Bird moves const
-    private val jumpVelocity: Float = 15f  // Downward velocity on jump
-    private val gravity: Float = -0.5f  // Upward acceleration due to gravity
+    private val jumpVelocity: Float = 20f  // Downward velocity on jump
+    private val gravity: Float = -1f  // Upward acceleration due to gravity
     private val pipeSpeed: Float = 10f
     // Constants
     private val pipeYGap = 500 // minus minPipeY
