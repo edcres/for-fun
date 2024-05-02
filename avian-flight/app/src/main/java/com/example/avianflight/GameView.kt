@@ -137,9 +137,9 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
                 pipes[i].xGap + pipeWidth > birdX - birdRadius
             ) {
                 // Top Pipe
-                if (i == pipePos && birdY - birdRadius < pipes[i].bottom) return true
+                if (i == pipePos && birdY - birdRadius + 10 < pipes[i].bottom) return true
                 // Bottom Pipe
-                else if (i == pipePos + 1 && birdY + birdRadius > pipes[i].top) return true
+                else if (i == pipePos + 1 && birdY + birdRadius - 5 > pipes[i].top) return true
             }
         }
         // Ceiling or Floor Collision
