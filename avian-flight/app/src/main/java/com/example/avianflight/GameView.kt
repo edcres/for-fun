@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.Typeface
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
@@ -35,6 +36,13 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     private val birdPaint: Paint = Paint().apply { color = Color.CYAN }
     private val pipePaint: Paint = Paint().apply { color = Color.RED }
     private val bottomEdgePaint = Paint().apply { color = Color.parseColor("#910303") }
+    private val scorePaint = Paint().apply {
+        color = Color.BLACK
+        textSize = 150f
+        textAlign = Paint.Align.CENTER
+        typeface = Typeface.DEFAULT_BOLD
+        isAntiAlias = true
+    }
 
     init {
         setBackgroundColor(Color.parseColor("#be1010"))
@@ -98,11 +106,12 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
             0f, height.toFloat() - bottomEdgeHeight,
             width.toFloat(), height.toFloat(), bottomEdgePaint
         )
-        // Score points
-        if (birdPassedPipe()) score++
-        Log.d("TAG0", "onDraw: score = $score")
         // Handle collision, e.g., end game or reset
         if (birdCollisionDetected()) gameOn = false
+        // Score points
+        if (birdPassedPipe()) score++
+        // Draw Score
+        canvas?.drawText("$score", width/2f, 300f, scorePaint)
         // Triggers onDraw
         if (gameOn) postInvalidateOnAnimation()
     }
