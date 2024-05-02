@@ -13,8 +13,6 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     // GameState
     private var gameOn = false
     private var pipes = mutableListOf<Pipe>()
-    // Test
-    private var testCounter = 0 // debug
     // Bird moves var
     private var birdStartY: Float = 0f
     private var birdY: Float = 0f
@@ -62,7 +60,6 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        Log.d("TAGTest1", "onDraw: called: $testCounter pipeSets = ${pipes.size/2}")
         // draw bird
         canvas?.drawCircle(birdX, birdY, birdRadius, birdPaint)
         // Move Bird
