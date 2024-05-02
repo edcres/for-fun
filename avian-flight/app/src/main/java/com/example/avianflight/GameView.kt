@@ -96,7 +96,6 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
                 if (pipe.xGap + pipeWidth < 0) {
                     val xGap = 2 * pipeGapX + 2 * pipeWidth
                     val randomGapTop = getRandomGapTop()
-                    val pipeBottom = height.toFloat() - bottomEdgeHeight
 
                     // TODO: Try using an iterator instead
                     if (previousTopPipe == null) {
@@ -109,11 +108,8 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
                         previousTopPipe = null
                         // Bottom Pipe
                         pipe.xGap = xGap
-                        pipe.top = randomGapTop
+                        pipe.top = getRandomGapBottom(randomGapTop)
                     }
-
-                    newPipes.add(Pipe(xGap, 0f, randomGapTop))
-                    newPipes.add(Pipe(xGap, getRandomGapBottom(randomGapTop), pipeBottom))
                 }
             }
 
@@ -126,42 +122,42 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
 
 
             // Draw Pipes
-            while (iterator.hasNext()) {
-                val pipe = iterator.next()
-                pipe.xGap -= pipeSpeed
-                canvas?.drawRect(pipe.xGap, pipe.top, pipe.xGap + pipeWidth, pipe.bottom, pipePaint)
-                // If pipe left the screen, add new pipe
-//                Log.d("TAGTest3", "onDraw: to remove, pipe passed ${pipe.xGap + pipeWidth < 0}, pipes = ${pipes.size}")
-//                if (pipe.xGap + pipeWidth < 0 && !pipeSetRemoved) {
-                if (pipe.xGap + pipeWidth < 0) {
-                    canAddPipe = !canAddPipe
-//                    Log.d("TAGTest1B", "onDraw: pipeX = ${pipe.x}; pipeXEnd = ${pipe.x + pipeWidth}")
-//                    Log.d("TAGTest4", "onDraw: to remove, pipe at ${pipes[0].xGap + pipeWidth}?, pipeSets = ${pipes.size/2}")
-                    iterator.remove()
-//                    Log.d("TAGTest5", "onDraw: removed, left pipe at ${pipes[0].xGap + pipeWidth}, pipeSets = ${pipes.size/2}")
-//                    Log.d("TAGTest2A", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
-                    val xGap = 2 * pipeGapX + 2 * pipeWidth
-                    val randomGapTop = getRandomGapTop()
-                    newPipes.add(Pipe(xGap, 0f, randomGapTop))
-                    newPipes.add(Pipe(xGap, getRandomGapBottom(randomGapTop), height.toFloat() - bottomEdgeHeight))
-//                    Log.d("TAGTest6", "onDraw: pipeAdded")
-//                    Log.d("TAGTest2B", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
-                    // TODO: I think this if statement should only happen once inside the while loop and it happens more than once
-//                    pipeSetRemoved = true
-                }
-            }
-            // Add new pipes only after iteration is complete
-//            Log.d("TAGTest2C", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
-//            Log.d("TAGTest3", "onDraw: called: $testCounter pipeSets = ${pipes.size/2}")
-            pipes.addAll(newPipes)
-//            newPipes.clear()
-//            Log.d("TAGTest4", "onDraw: called: $testCounter, newPipeSets = ${newPipes.size/2}, pipeSets = ${pipes.size/2} \n.")
-        } else {
-            // Draw pipes stopped
-            while (iterator.hasNext()) {
-                val pipe = iterator.next()
-                canvas?.drawRect(pipe.xGap, pipe.top, pipe.xGap + pipeWidth, pipe.bottom, pipePaint)
-            }
+//            while (iterator.hasNext()) {
+//                val pipe = iterator.next()
+//                pipe.xGap -= pipeSpeed
+//                canvas?.drawRect(pipe.xGap, pipe.top, pipe.xGap + pipeWidth, pipe.bottom, pipePaint)
+//                // If pipe left the screen, add new pipe
+////                Log.d("TAGTest3", "onDraw: to remove, pipe passed ${pipe.xGap + pipeWidth < 0}, pipes = ${pipes.size}")
+////                if (pipe.xGap + pipeWidth < 0 && !pipeSetRemoved) {
+//                if (pipe.xGap + pipeWidth < 0) {
+//                    canAddPipe = !canAddPipe
+////                    Log.d("TAGTest1B", "onDraw: pipeX = ${pipe.x}; pipeXEnd = ${pipe.x + pipeWidth}")
+////                    Log.d("TAGTest4", "onDraw: to remove, pipe at ${pipes[0].xGap + pipeWidth}?, pipeSets = ${pipes.size/2}")
+//                    iterator.remove()
+////                    Log.d("TAGTest5", "onDraw: removed, left pipe at ${pipes[0].xGap + pipeWidth}, pipeSets = ${pipes.size/2}")
+////                    Log.d("TAGTest2A", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
+//                    val xGap = 2 * pipeGapX + 2 * pipeWidth
+//                    val randomGapTop = getRandomGapTop()
+//                    newPipes.add(Pipe(xGap, 0f, randomGapTop))
+//                    newPipes.add(Pipe(xGap, getRandomGapBottom(randomGapTop), height.toFloat() - bottomEdgeHeight))
+////                    Log.d("TAGTest6", "onDraw: pipeAdded")
+////                    Log.d("TAGTest2B", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
+//                    // TODO: I think this if statement should only happen once inside the while loop and it happens more than once
+////                    pipeSetRemoved = true
+//                }
+//            }
+//            // Add new pipes only after iteration is complete
+////            Log.d("TAGTest2C", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
+////            Log.d("TAGTest3", "onDraw: called: $testCounter pipeSets = ${pipes.size/2}")
+//            pipes.addAll(newPipes)
+////            newPipes.clear()
+////            Log.d("TAGTest4", "onDraw: called: $testCounter, newPipeSets = ${newPipes.size/2}, pipeSets = ${pipes.size/2} \n.")
+//        } else {
+//            // Draw pipes stopped
+//            while (iterator.hasNext()) {
+//                val pipe = iterator.next()
+//                canvas?.drawRect(pipe.xGap, pipe.top, pipe.xGap + pipeWidth, pipe.bottom, pipePaint)
+//            }
         }
 
 
