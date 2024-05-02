@@ -159,5 +159,6 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
         birdY = birdStartY
         pipes.clear()
         initializePipes()
+        score = 0
     }
 }
