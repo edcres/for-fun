@@ -27,8 +27,8 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     private val pipeSpeed: Float = 10f
     // Constants
     private val pipeYGap = 500 // minus minPipeY
-    private val minPipeY: Int = 100
-    private val pipeGapX: Float = 500f
+    private val minPipeY: Int = 200
+    private val pipeGapX: Float = 600f
     // Drawing Constants
     private val bottomEdgeHeight: Float = 200f
     private val pipeWidth: Float = 150f
