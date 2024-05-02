@@ -1,27 +1,13 @@
 package com.example.avianflight
 
 // maybe remove mutability from the mutable list of pipes
-
-// 6 -> 8 -> 10 -> 12 -> 16 -> 20 -> 24 -> 32 -> 40 -> 48
-// every 3:  x-1+2 ; x-2+4 ; x-4+8 ; x-8+16
-// 3033; 3123; 3134; 4044
-// 011, 011
-// -4; -8
-// it goes from 7 to 8 very fast
-
-// remove first pipe set when gone
-// a shitton of pipes are added when
-//      - one is removed, i only want to add one
-// add pipes correctly
-// gets very laggy after like 6 pipes
-//  - (probably because theres a shitton of pipes after some time)
+// try using iterator when drawing pipes
 //
 // make the gravity feel better
-// when game  is over , have a way to restart it
-//make the code look better (cleaner)
+// when game is over , have a way to restart it
+// make the code look better (cleaner)
 //
 // explore other overriding functions from the canvas library like (onDraw())
-
 
 class Scratch {
 

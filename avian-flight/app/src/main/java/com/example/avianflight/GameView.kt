@@ -9,11 +9,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewTreeObserver
 
-// todo: instead of adding and removing items from a list, just have one list with 4 pipe sets
-//          - and just change the position for each pipe in the list
-// The way is is now it creates a ConcurrentModificationException
-//      - and fixing it is resource intensive
-
 class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayoutListener {
     // GameState
     private var gameOn = false
@@ -68,120 +63,45 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-//        Log.d("TAGTest1", "onDrawDraw: called $testCounter")
-
-        testCounter++
-        val newPipes = mutableListOf<Pipe>()
         Log.d("TAGTest1", "onDraw: called: $testCounter pipeSets = ${pipes.size/2}")
-        val iterator = pipes.iterator()
         // draw bird
         canvas?.drawCircle(birdX, birdY, birdRadius, birdPaint)
-        if (gameOn) {
-//            var pipeSetRemoved = false
-            // Move Bird
-            birdVelocity -= gravity
-            birdY -= birdVelocity
-
-
-
-
-            var previousTopPipe: Pipe? = null
-            for (pipe in pipes) {
-                // Move pipe
-                pipe.xGap -= pipeSpeed
-                canvas?.drawRect(
-                    pipe.xGap, pipe.top, pipe.xGap + pipeWidth, pipe.bottom, pipePaint
-                )
-                // If pipe left the screen, move it to the end
-                if (pipe.xGap + pipeWidth < 0) {
-                    val xGap = 2 * pipeGapX + 2 * pipeWidth
-                    val randomGapTop = getRandomGapTop()
-
-                    // TODO: Try using an iterator instead
-                    if (previousTopPipe == null) {
-                        previousTopPipe = pipe
-                    } else {
-                        pipe.xGap = xGap
-                        // Top Pipe
-                        previousTopPipe.xGap = xGap
-                        previousTopPipe.bottom = randomGapTop
-                        previousTopPipe = null
-                        // Bottom Pipe
-                        pipe.xGap = xGap
-                        pipe.top = getRandomGapBottom(randomGapTop)
-                    }
+        // Move Bird
+        birdVelocity -= gravity
+        birdY -= birdVelocity
+        // Draw Pipes
+        var previousTopPipe: Pipe? = null
+        for (pipe in pipes) {
+            // Move pipe
+            pipe.xGap -= pipeSpeed
+            canvas?.drawRect(
+                pipe.xGap, pipe.top, pipe.xGap + pipeWidth, pipe.bottom, pipePaint
+            )
+            // If pipe left the screen, move it to the end
+            if (pipe.xGap + pipeWidth < 0) {
+                val xGap = 2 * pipeGapX + 2 * pipeWidth
+                val randomGapTop = getRandomGapTop()
+                if (previousTopPipe == null) {
+                    previousTopPipe = pipe
+                } else {
+                    pipe.xGap = xGap
+                    // Top Pipe
+                    previousTopPipe.xGap = xGap
+                    previousTopPipe.bottom = randomGapTop
+                    previousTopPipe = null
+                    // Bottom Pipe
+                    pipe.xGap = xGap
+                    pipe.top = getRandomGapBottom(randomGapTop)
                 }
             }
-
-
-
-
-
-
-
-
-
-            // Draw Pipes
-//            while (iterator.hasNext()) {
-//                val pipe = iterator.next()
-//                pipe.xGap -= pipeSpeed
-//                canvas?.drawRect(pipe.xGap, pipe.top, pipe.xGap + pipeWidth, pipe.bottom, pipePaint)
-//                // If pipe left the screen, add new pipe
-////                Log.d("TAGTest3", "onDraw: to remove, pipe passed ${pipe.xGap + pipeWidth < 0}, pipes = ${pipes.size}")
-////                if (pipe.xGap + pipeWidth < 0 && !pipeSetRemoved) {
-//                if (pipe.xGap + pipeWidth < 0) {
-//                    canAddPipe = !canAddPipe
-////                    Log.d("TAGTest1B", "onDraw: pipeX = ${pipe.x}; pipeXEnd = ${pipe.x + pipeWidth}")
-////                    Log.d("TAGTest4", "onDraw: to remove, pipe at ${pipes[0].xGap + pipeWidth}?, pipeSets = ${pipes.size/2}")
-//                    iterator.remove()
-////                    Log.d("TAGTest5", "onDraw: removed, left pipe at ${pipes[0].xGap + pipeWidth}, pipeSets = ${pipes.size/2}")
-////                    Log.d("TAGTest2A", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
-//                    val xGap = 2 * pipeGapX + 2 * pipeWidth
-//                    val randomGapTop = getRandomGapTop()
-//                    newPipes.add(Pipe(xGap, 0f, randomGapTop))
-//                    newPipes.add(Pipe(xGap, getRandomGapBottom(randomGapTop), height.toFloat() - bottomEdgeHeight))
-////                    Log.d("TAGTest6", "onDraw: pipeAdded")
-////                    Log.d("TAGTest2B", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
-//                    // TODO: I think this if statement should only happen once inside the while loop and it happens more than once
-////                    pipeSetRemoved = true
-//                }
-//            }
-//            // Add new pipes only after iteration is complete
-////            Log.d("TAGTest2C", "onDraw: called: $testCounter newPipeSets = ${newPipes.size/2}")
-////            Log.d("TAGTest3", "onDraw: called: $testCounter pipeSets = ${pipes.size/2}")
-//            pipes.addAll(newPipes)
-////            newPipes.clear()
-////            Log.d("TAGTest4", "onDraw: called: $testCounter, newPipeSets = ${newPipes.size/2}, pipeSets = ${pipes.size/2} \n.")
-//        } else {
-//            // Draw pipes stopped
-//            while (iterator.hasNext()) {
-//                val pipe = iterator.next()
-//                canvas?.drawRect(pipe.xGap, pipe.top, pipe.xGap + pipeWidth, pipe.bottom, pipePaint)
-//            }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         // Draw bottom edge
         canvas?.drawRect(
             0f, height.toFloat() - bottomEdgeHeight,
             width.toFloat(), height.toFloat(), bottomEdgePaint
         )
-
         // Handle collision, e.g., end game or reset
         if (birdCollisionDetected()) gameOn = false
-
         // Triggers onDraw
         if (gameOn) postInvalidateOnAnimation()
     }
