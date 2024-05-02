@@ -107,7 +107,10 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
             width.toFloat(), height.toFloat(), bottomEdgePaint
         )
         // Handle collision, e.g., end game or reset
-        if (birdCollisionDetected()) gameOn = false
+        if (birdCollisionDetected()) {
+            gameOn = false
+            canvas?.drawText("Game Over", width/2f, 400f + scorePaint.textSize, scorePaint)
+        }
         // Score points
         if (birdPassedPipe()) score++
         // Draw Score
