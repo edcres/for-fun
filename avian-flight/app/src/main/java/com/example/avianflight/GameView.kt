@@ -79,7 +79,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
             )
             // If pipe left the screen, move it to the end
             if (pipe.xGap + pipeWidth < 0) {
-                val xGap = 2 * pipeGapX + 2 * pipeWidth
+                val xGap = 2 * pipeGapX + 3 * pipeWidth
                 val randomGapTop = getRandomGapTop()
                 if (previousTopPipe == null) {
                     previousTopPipe = pipe
