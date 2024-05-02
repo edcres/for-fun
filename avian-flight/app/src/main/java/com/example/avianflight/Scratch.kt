@@ -1,8 +1,5 @@
 package com.example.avianflight
 
-// maybe remove mutability from the mutable list of pipes
-// try using iterator when drawing pipes
-//
 // make the gravity feel better
 // when game is over , have a way to restart it
 // make the code look better (cleaner)

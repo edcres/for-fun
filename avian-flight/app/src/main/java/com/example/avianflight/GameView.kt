@@ -15,7 +15,6 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     private var pipes = mutableListOf<Pipe>()
     // Test
     private var testCounter = 0 // debug
-    private var canAddPipe = false
     // Bird moves var
     private var birdStartY: Float = 0f
     private var birdY: Float = 0f
@@ -70,6 +69,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
         birdVelocity -= gravity
         birdY -= birdVelocity
         // Draw Pipes
+        // May be better using iterator when drawing pipes
         var previousTopPipe: Pipe? = null
         for (pipe in pipes) {
             // Move pipe
@@ -107,7 +107,6 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     }
 
     private fun initializePipes() {
-        // TODO: just change the position values of the pipes, rework this if necessary
         for (i in 1..3) {
             val initialXGap = i * pipeGapX + 650
             val randomYGapTop = getRandomGapTop()
@@ -149,5 +148,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     private fun restartGame() {
         birdVelocity = birdStartVelocity
         birdY = birdStartY
+        pipes.clear()
+        initializePipes()
     }
 }
