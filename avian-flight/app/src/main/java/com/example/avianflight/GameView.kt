@@ -26,8 +26,8 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
     private val gravity: Float = -1f  // Upward acceleration due to gravity
     private val pipeSpeed: Float = 10f
     // Constants
-    private val pipeYGap = 500 // minus minPipeY
-    private val minPipeY: Int = 200
+    private val pipeYGap = 650 // minus minPipeY
+    private val minPipeY: Int = 300
     private val pipeGapX: Float = 600f
     // Drawing Constants
     private val bottomEdgeHeight: Float = 200f
