@@ -12,6 +12,7 @@ import android.view.ViewTreeObserver
 class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayoutListener {
     // GameState
     private var gameOn = false
+    private var score = 0
     private var pipes = mutableListOf<Pipe>()
     // Bird moves var
     private var birdStartY: Float = 0f
@@ -60,7 +61,7 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        // draw bird
+        // Draw bird
         canvas?.drawCircle(birdX, birdY, birdRadius, birdPaint)
         // Move Bird
         birdVelocity -= gravity
@@ -97,6 +98,9 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
             0f, height.toFloat() - bottomEdgeHeight,
             width.toFloat(), height.toFloat(), bottomEdgePaint
         )
+        // Score points
+        if (birdPassedPipe()) score++
+        Log.d("TAG0", "onDraw: score = $score")
         // Handle collision, e.g., end game or reset
         if (birdCollisionDetected()) gameOn = false
         // Triggers onDraw
@@ -140,6 +144,14 @@ class GameView(context: Context) : View(context), ViewTreeObserver.OnGlobalLayou
         }
         // Ceiling or Floor Collision
         return birdY < (0 + birdRadius-5) || birdY > (height - bottomEdgeHeight - birdRadius)
+    }
+
+    private fun birdPassedPipe(): Boolean {
+        var pipePos = 0
+        // Get current pipe (only check top pipes)
+        for (i in 2 until pipes.size)
+            if (i % 2 == 0 && pipes[pipePos].xGap > pipes[i].xGap) pipePos = i
+        return pipes[pipePos].xGap + pipeWidth == birdX - birdRadius
     }
 
     private fun restartGame() {
