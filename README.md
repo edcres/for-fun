@@ -1,3 +1,3 @@
 # for-fun
 
-Apps I wanted to make but are not technically interesting
+Apps I want to make
