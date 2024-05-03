@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
             touchCoordinates.yCor = event.y
             val coordinatesString = "x = ${event.x}\ny = ${event.y}"
             touchCoordinatesTxt.text = coordinatesString
+            circleView.invalidate()
         } else {
             Log.e(mainTAG, "onTouchEvent: is null")
         }
