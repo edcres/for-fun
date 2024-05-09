@@ -12,6 +12,7 @@
         android:layout_width="500sp"
         android:layout_height="0dp"
         android:gravity="center|top"
+        android:text=""
         android:textColor="@color/neon_green"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

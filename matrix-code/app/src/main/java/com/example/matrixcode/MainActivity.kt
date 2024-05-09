@@ -3,18 +3,17 @@ package com.example.matrixcode
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 
-// A cool way: https://www.youtube.com/watch?v=25AUSTtob6g
-
 // Click the screen to use the app
 
 /**
- *
- *
+ * View is started twice for soe reason
  * future:
  *  - display a consecutive vertical gap between characters
  *      - maybe manually input " " withing the same index 1 to 4 consecutive times
@@ -25,6 +24,8 @@ import androidx.core.content.ContextCompat
 class MainActivity : AppCompatActivity() {
 
     private val mainTAG = "Main_TAG"
+    private val handler = Handler(Looper.getMainLooper())
+    private var counter = 1
     private val xAxisChars = 39
     private val yAxisChars = 48
     private lateinit var matrixTxt: TextView
@@ -36,45 +37,35 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        setContentView(R.layout.activity_main)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.navigationBarColor = ContextCompat.getColor(this, R.color.black)
 //            window.navigationBarColor = resources.getColor(R.color.black, null)
         }
-
         matrixTxt = findViewById(R.id.matrix_txt)
 
+        Log.d(mainTAG, "onCreate: called")
         matrixTxt.setOnClickListener {
             populateY(makeXAxis())
             populateMatrixTxt()
         }
 
-//        while (true) {
-//            Log.d(mainTAG, "onCreate: loop")
-//            matrixTxt.performClick()
-//            runBlocking {
-//                delay(500)
-//            }
-//        }
+        val updateTextRunnable = object : Runnable {
+            override fun run() {
+                // Update the TextView
+                populateY(makeXAxis())
+                populateMatrixTxt()
+                counter++
 
-//        while (true) {
-//            CoroutineScope(Dispatchers.IO).launch {
-//                populateY(makeXAxis())
-//                withContext(Dispatchers.Main) {
-//                    populateMatrixTxt()
-//                }
-//                Thread.sleep(500)
-//            }
-//        }
-
-//        while (true) {
-//            Log.d(mainTAG, "while called")
-//            populateY(makeXAxis())
-//            Log.d(mainTAG, "yAxisQueue: size = ${yAxisQueue.size} \n${yAxisQueue.last}")
-//            Thread.sleep(500)
-//            populateMatrixTxt()
-//        }
+                if (counter < 1000000) {
+                    // Reschedule the same runnable to run again after 2 seconds
+                    handler.postDelayed(this, 500)
+                }
+            }
+        }
+        // Start it
+        handler.postDelayed(updateTextRunnable, 0)
     }
 
     private fun populateMatrixTxt() {
@@ -82,7 +73,6 @@ class MainActivity : AppCompatActivity() {
         for (i in 0 until yAxisQueue.size) {
             matrixString = "${yAxisQueue[i]}\n$matrixString"
         }
-        Log.d(mainTAG, "\n$matrixString")
         matrixTxt.text = matrixString
     }
 
@@ -96,8 +86,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun populateY(xAxis: String) {
         yAxisQueue.add(xAxis)
-        if (yAxisQueue.size > yAxisChars) {
-            yAxisQueue.remove()
-        }
+        if (yAxisQueue.size > yAxisChars) yAxisQueue.remove()
     }
 }
