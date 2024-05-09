@@ -1,3 +1,3 @@
 # for-fun
 
-Apps I want to make
+Apps I make to itch my brain
