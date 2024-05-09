@@ -11,4 +11,5 @@
     <color name="main">#5EDFFF</color>
     <color name="highlight">#0096D1</color>
     <color name="transparent">#00000000</color>
+    <color name="divider">#060E33</color>
 </resources>
