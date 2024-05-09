@@ -126,12 +126,19 @@ class MainActivity : AppCompatActivity() {
         val percents = listOf(0.0, 0.10,    0.12,    0.22,    0.24,     0.32,     0.35,     0.37)
         var taxedIn = 0.0
         var testCounter = 0
-        for (bracket in 1 .. brackets.size) {
+        for (bracket in 1 until brackets.size) {
             testCounter ++
             if (annualIncome <= brackets[bracket]) {
                 Log.d("testTAG-1", "getAmountOfTaxesUsingTaxBracket: $taxedIn")
                 Log.d("testTAG0", "getAmountOfTaxesUsingTaxBracket: loop $testCounter: ($annualIncome - ${brackets[bracket-1]}) * ${percents[bracket]}")
                 Log.d("testTAG1", "getAmountOfTaxesUsingTaxBracket: ${(annualIncome - brackets[bracket-1]) * percents[bracket]}")
+                taxedIn += (annualIncome - brackets[bracket-1]) * percents[bracket]
+                return taxedIn
+            } else if (brackets[bracket] == brackets.last()) {
+//            } else if (annualIncome > brackets[brackets.size-2]) {
+                // Last bracket
+                Log.d("TAG2", "getAmountOfTaxesUsingTaxBracket: last bracket")
+                Log.d("TAG3", "getAmountOfTaxesUsingTaxBracket: taxedIn = $taxedIn + ${(annualIncome - brackets[bracket-1]) * percents[bracket]}")
                 taxedIn += (annualIncome - brackets[bracket-1]) * percents[bracket]
                 return taxedIn
             } else taxedIn += (brackets[bracket] - brackets[bracket-1]) * percents[bracket]
@@ -144,8 +151,8 @@ class MainActivity : AppCompatActivity() {
         // 70,000   = 5,147 + 5,560 = 10,707.5
         // 95,375-  = 5,147 + 11,143 = 16,290
         // 150,000  = 16,290 + 13,110 = 29,400
-        // 578,125- = 174,238 ???
-        // 1,000,000= 174,238 + 156,093.75 = 330,331.75 ???
+        // 578,125- = 174,238.25 ???
+        // 1,000,000= 174,238.25  + 156,093.75 = 330,331.75 ???
         return taxedIn
     }
 
