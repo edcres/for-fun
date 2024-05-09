@@ -118,27 +118,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getAmountOfTaxesUsingTaxBracket(annualIncome: Double): Double {
-        // todo: big: index out of bounds exception with income > 578,125
         // todo: Make this so the user can input their
         //  custom tax brackets with the amounts.
         // Tax brackets of 2023-2024
         val brackets = listOf(0.0, 11000.0, 44725.0, 95375.0, 182100.0, 231250.0, 578125.0, 0.0)
         val percents = listOf(0.0, 0.10,    0.12,    0.22,    0.24,     0.32,     0.35,     0.37)
         var taxedIn = 0.0
-        var testCounter = 0
         for (bracket in 1 until brackets.size) {
-            testCounter ++
             if (annualIncome <= brackets[bracket]) {
-                Log.d("testTAG-1", "getAmountOfTaxesUsingTaxBracket: $taxedIn")
-                Log.d("testTAG0", "getAmountOfTaxesUsingTaxBracket: loop $testCounter: ($annualIncome - ${brackets[bracket-1]}) * ${percents[bracket]}")
-                Log.d("testTAG1", "getAmountOfTaxesUsingTaxBracket: ${(annualIncome - brackets[bracket-1]) * percents[bracket]}")
                 taxedIn += (annualIncome - brackets[bracket-1]) * percents[bracket]
                 return taxedIn
             } else if (brackets[bracket] == brackets.last()) {
-//            } else if (annualIncome > brackets[brackets.size-2]) {
                 // Last bracket
-                Log.d("TAG2", "getAmountOfTaxesUsingTaxBracket: last bracket")
-                Log.d("TAG3", "getAmountOfTaxesUsingTaxBracket: taxedIn = $taxedIn + ${(annualIncome - brackets[bracket-1]) * percents[bracket]}")
                 taxedIn += (annualIncome - brackets[bracket-1]) * percents[bracket]
                 return taxedIn
             } else taxedIn += (brackets[bracket] - brackets[bracket-1]) * percents[bracket]
