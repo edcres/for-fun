@@ -120,6 +120,7 @@ class MainActivity : AppCompatActivity() {
     private fun getAmountOfTaxesUsingTaxBracket(
         annualIncome: Double
     ): Double {
+        // todo: big: index out of bounds exception with income > 578,125
         // todo: Make this so the user can input their
         //  custom tax brackets with the amounts.
         // Tax brackets of 2023-2024
@@ -127,7 +128,7 @@ class MainActivity : AppCompatActivity() {
         val percents = listOf(0.0, 0.10,    0.12,    0.22,    0.24,     0.32,     0.35,     0.37)
         var taxedIn = 0.0
         var testCounter = 0
-        for (bracket in 1..brackets.size) {
+        for (bracket in 1 .. brackets.size) {
             testCounter ++
             if (annualIncome <= brackets[bracket]) {
                 Log.d("testTAG-1", "getAmountOfTaxesUsingTaxBracket: $taxedIn")
@@ -139,6 +140,16 @@ class MainActivity : AppCompatActivity() {
 //            } else taxedIn += (annualIncome-taxedIn) * percents[bracket]
 //            } else taxedIn += (brackets[bracket]-taxedIn) * percents[bracket]
         }
+        // 0.0      = 0.0
+        // 500      = 50.0
+        // 11,000-  = 1100.0
+        // 20,000   = 1100 + 1080 = 2,180.0
+        // 44,725-  = 1100 + 4047 = 5,147.0
+        // 70,000   = 5,147 + 5,560 = 10,707.5
+        // 95,375-  = 5,147 + 11,143 = 16,290
+       // 150,000   = 16,290 + 13,110 = 29,400
+       // 578,125-  = 174,238 ???
+     // 1,000,000   = 174,238 + 156,093.75 = 330,331.75
 
 
 //
