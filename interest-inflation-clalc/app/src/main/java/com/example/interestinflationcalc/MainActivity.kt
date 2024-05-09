@@ -117,9 +117,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getAmountOfTaxesUsingTaxBracket(
-        annualIncome: Double
-    ): Double {
+    private fun getAmountOfTaxesUsingTaxBracket(annualIncome: Double): Double {
         // todo: big: index out of bounds exception with income > 578,125
         // todo: Make this so the user can input their
         //  custom tax brackets with the amounts.
@@ -137,8 +135,6 @@ class MainActivity : AppCompatActivity() {
                 taxedIn += (annualIncome - brackets[bracket-1]) * percents[bracket]
                 return taxedIn
             } else taxedIn += (brackets[bracket] - brackets[bracket-1]) * percents[bracket]
-//            } else taxedIn += (annualIncome-taxedIn) * percents[bracket]
-//            } else taxedIn += (brackets[bracket]-taxedIn) * percents[bracket]
         }
         // 0.0      = 0.0
         // 500      = 50.0
@@ -150,31 +146,6 @@ class MainActivity : AppCompatActivity() {
        // 150,000   = 16,290 + 13,110 = 29,400
        // 578,125-  = 174,238 ???
      // 1,000,000   = 174,238 + 156,093.75 = 330,331.75
-
-
-//
-//        if (annualIncome <= brackets[0]) {
-//            taxedIn += annualIncome-taxedIn * 0.10
-//        } else taxedIn += brackets[0] * 0.10
-//        if (annualIncome <= brackets[1]) {
-//            taxedIn += annualIncome-taxedIn * 0.12
-//        } else taxedIn += brackets[1] * 0.12
-//
-//        if (annualIncome <= brackets[0]) {
-//            taxedIn += annualIncome * 0.10
-//        } else taxedIn += brackets[0] * 0.10
-//
-//        when {
-//            annualIncome <= 11275 -> annualIncome * 0.10
-//            annualIncome <= 43975 -> 1127.50 + (annualIncome - 11275) * 0.12
-//            annualIncome <= 93675 -> 5045.50 + (annualIncome - 43975) * 0.22
-//            annualIncome <= 182575 -> 16165.50 + (annualIncome - 93675) * 0.24
-//            annualIncome <= 231600 -> 37853.50 + (annualIncome - 182575) * 0.32
-//            annualIncome <= 578125 -> 53313.50 + (annualIncome - 231600) * 0.35
-//            else -> 166156.50 + (annualIncome - 578125) * 0.37
-//        }
-
-
 
         return taxedIn
     }
