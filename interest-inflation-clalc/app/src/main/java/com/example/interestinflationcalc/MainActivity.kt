@@ -3,6 +3,7 @@ package com.example.interestinflationcalc
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -119,67 +120,52 @@ class MainActivity : AppCompatActivity() {
     private fun getAmountOfTaxesUsingTaxBracket(
         annualIncome: Double
     ): Double {
-        // todo: In the future, make this so the user can input their
+        // todo: Make this so the user can input their
         //  custom tax brackets with the amounts.
-        var result = 0.0
-        // todo: tax brackets updated April 2022
-        // 10% (to $9,950), 12% (to $40,525), 22% (to $86,375), 24% (to $164,925),
-        //   32% (to $209,425), 35% (to $523,600), 37% (to infinity)
-        // $995 plus 12% of the amount over $9,950
-        val newBracketsAndTaxes = mutableListOf(
-            listOf(0.10, 0.0),
-            listOf(0.12, 9_950.0),
-            listOf(0.22, 40_525.0),
-            listOf(0.24, 86_375.0),
-            listOf(0.32, 164_925.0),
-            listOf(0.35, 209_425.0),
-            listOf(0.37, 523_600.0)
-        )
-        newBracketsAndTaxes.forEach { interestAndFloor ->
-            if(annualIncome > interestAndFloor[1]) {
-                result += (annualIncome - interestAndFloor[1]) * interestAndFloor[0]
-            }
+        // Tax brackets of 2023-2024
+        val brackets = listOf(0.0, 11000.0, 44725.0, 95375.0, 182100.0, 231250.0, 578125.0, 0.0)
+        val percents = listOf(0.0, 0.10,    0.12,    0.22,    0.24,     0.32,     0.35,     0.37)
+        var taxedIn = 0.0
+        var testCounter = 0
+        for (bracket in 1..brackets.size) {
+            testCounter ++
+            if (annualIncome <= brackets[bracket]) {
+                Log.d("testTAG-1", "getAmountOfTaxesUsingTaxBracket: $taxedIn")
+                Log.d("testTAG0", "getAmountOfTaxesUsingTaxBracket: loop $testCounter: ($annualIncome - ${brackets[bracket-1]}) * ${percents[bracket]}")
+                Log.d("testTAG1", "getAmountOfTaxesUsingTaxBracket: ${(annualIncome - brackets[bracket-1]) * percents[bracket]}")
+                taxedIn += (annualIncome - brackets[bracket-1]) * percents[bracket]
+                return taxedIn
+            } else taxedIn += (brackets[bracket] - brackets[bracket-1]) * percents[bracket]
+//            } else taxedIn += (annualIncome-taxedIn) * percents[bracket]
+//            } else taxedIn += (brackets[bracket]-taxedIn) * percents[bracket]
         }
 
-//        // I chose not to use a mutableMap bc the items might not be in order.
-//        val bracketsAndTaxes = mutableMapOf(
-//            0.10 to 0.0,
-//            0.12 to 9_950.0,
-//            0.22 to 40_525.0,
-//            0.24 to 86_375.0,
-//            0.32 to 164_925.0,
-//            0.35 to 209_425.0,
-//            0.37 to 523_600.0    // null bc it's infinity
-//        )
-////        bracketsAndTaxes.put()
-//        bracketsAndTaxes.forEach { (key, value) ->
-//            if (annualIncome > value) {
-//                result += (annualIncome - value) * key
-//            }
+
+//
+//        if (annualIncome <= brackets[0]) {
+//            taxedIn += annualIncome-taxedIn * 0.10
+//        } else taxedIn += brackets[0] * 0.10
+//        if (annualIncome <= brackets[1]) {
+//            taxedIn += annualIncome-taxedIn * 0.12
+//        } else taxedIn += brackets[1] * 0.12
+//
+//        if (annualIncome <= brackets[0]) {
+//            taxedIn += annualIncome * 0.10
+//        } else taxedIn += brackets[0] * 0.10
+//
+//        when {
+//            annualIncome <= 11275 -> annualIncome * 0.10
+//            annualIncome <= 43975 -> 1127.50 + (annualIncome - 11275) * 0.12
+//            annualIncome <= 93675 -> 5045.50 + (annualIncome - 43975) * 0.22
+//            annualIncome <= 182575 -> 16165.50 + (annualIncome - 93675) * 0.24
+//            annualIncome <= 231600 -> 37853.50 + (annualIncome - 182575) * 0.32
+//            annualIncome <= 578125 -> 53313.50 + (annualIncome - 231600) * 0.35
+//            else -> 166156.50 + (annualIncome - 578125) * 0.37
 //        }
 
-//        if (annualIncome > 0) { // 10%
-//            result += annualIncome * 0.10
-//            if (annualIncome > 9_950) { // 12%
-//                result += (annualIncome - 9_950) * .12
-//                if (annualIncome > 40_525) {
-//                    result += (annualIncome - 40_525) * .22
-//                    if (annualIncome > 86_375) {
-//                        result += (annualIncome - 86_375) * .24
-//                        if (annualIncome > 164_925) {
-//                            result += (annualIncome - 164_925) * .32
-//                            if (annualIncome > 209_425) {
-//                                result += (annualIncome - 209_425) * .35
-//                                if (annualIncome > 523_600) {
-//                                    result += (annualIncome - 523_600) * .37
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-        return result
+
+
+        return taxedIn
     }
 
     private fun getGasCost(
