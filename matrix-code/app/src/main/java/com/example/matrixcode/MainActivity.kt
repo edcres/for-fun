@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import java.lang.Runnable
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
+import kotlinx.coroutines.*
 
 // Click the screen to use the app
 
@@ -24,7 +26,8 @@ import androidx.core.content.ContextCompat
 class MainActivity : AppCompatActivity() {
 
     private val mainTAG = "Main_TAG"
-    private val handler = Handler(Looper.getMainLooper())
+//    private val handler = Handler(Looper.getMainLooper())
+    private lateinit var job: Job
     private var counter = 1
     private val xAxisChars = 39
     private val yAxisChars = 48
@@ -33,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         "Z", "X", "->", "$", "*", "0", "1", "0", "1", "0", "1", "0", "1", "8",
         "&", "@", "]{", "^", "~", "<", ">", "+", " ", " "," "," "," "," "
     )
-//    private val yAxisQueue: LinkedList<String> = LinkedList<String>() // add/remove
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,21 +53,36 @@ class MainActivity : AppCompatActivity() {
             populateMatrixTxt()
         }
 
-        val updateTextRunnable = object : Runnable {
-            override fun run() {
-                // Update the TextView
+        job = CoroutineScope(Dispatchers.Main).launch {
+            while (isActive) { // Continues until the coroutine is active
+                delay(500) // Wait for 2 seconds
                 populateY(makeXAxis())
                 populateMatrixTxt()
                 counter++
-
-                if (counter < 1000000) {
-                    // Reschedule the same runnable to run again after 2 seconds
-                    handler.postDelayed(this, 500)
-                }
             }
         }
-        // Start it
-        handler.postDelayed(updateTextRunnable, 0)
+
+        // Using a Runnable
+//        val updateTextRunnable = object : Runnable {
+//            override fun run() {
+//                // Update the TextView
+//                populateY(makeXAxis())
+//                populateMatrixTxt()
+//                counter++
+//
+//                if (counter < 1000000) {
+//                    // Reschedule the same runnable to run again after 2 seconds
+//                    handler.postDelayed(this, 500)
+//                }
+//            }
+//        }
+//        // Start it
+//        handler.postDelayed(updateTextRunnable, 0)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        job.cancel()
     }
 
     private fun populateMatrixTxt() {
