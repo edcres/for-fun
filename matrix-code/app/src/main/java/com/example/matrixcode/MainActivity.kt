@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Using a Runnable
+        // Using a Handler and Runnable (Traditional). Yet another option would be a timer
 //        val updateTextRunnable = object : Runnable {
 //            override fun run() {
 //                // Update the TextView
