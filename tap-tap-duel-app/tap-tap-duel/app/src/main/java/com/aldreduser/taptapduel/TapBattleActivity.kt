@@ -14,7 +14,7 @@ class TapBattleActivity : AppCompatActivity() {
 
     var p1Score:Int = 0
     var p2Score:Int = 0
-    var maxTaps = 100
+    var maxTaps = 99
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
